@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const LoginWrapper = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
   min-height: 100vh;
   background: #f4f6f8;
   position: relative; 
   overflow: hidden; 
-  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+  font-family: 'Poppins', sans-serif; 
   color: #374151; 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Permite empilhar Header -> Container -> Footer */
   -webkit-font-smoothing: antialiased;
 
   .background-image {
@@ -58,17 +60,16 @@ export const LoginWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    min-height: 100vh;
-    padding-top: 64px;
+    flex: 1; /* SOLUÇÃO MÁGICA: Ocupa só o espaço que sobra entre o Header e o Footer */
+    width: 100%;
   }
   
   /* GRID FORÇADO PARA DESKTOP */
   .login-grid {
     width: 100%;
-    height: 100vh;
+    height: 100%; /* Adapta ao pai (.login-container) em vez de forçar 100vh */
     display: grid;
-    grid-template-columns: 70% 30%; /* Sempre dividido, sem colapsar */
+    grid-template-columns: 70% 30%; 
     position: relative;
     z-index: 1;
   }
@@ -77,13 +78,13 @@ export const LoginWrapper = styled.div`
   .left-panel {
     position: relative;
     display: block; 
-    height: 100vh;
+    height: 100%; /* Adapta ao pai em vez de forçar 100vh */
     overflow: hidden;
   }
 
   .left-hemolab-logo {
     position: absolute;
-    top: 84px;
+    top: 60px; 
     left: 128px;
     width: 700px;
     height: auto;
@@ -93,12 +94,12 @@ export const LoginWrapper = styled.div`
 
   .brand-description-text {
     position: absolute;
-    top: 280px; 
+    top: 240px; 
     left: 128px; 
-    font-size: 1.3rem; 
+    font-size: 1.5rem; 
     line-height: 1.6; 
     color: #F8F9FA; 
-    max-width: 520px; 
+    max-width: 600px; 
     font-weight: 400; 
     letter-spacing: 0.3px; 
     z-index: 3;
@@ -111,27 +112,27 @@ export const LoginWrapper = styled.div`
     z-index: 3;
     display: flex;
     flex-direction: column;
-    gap: 22px; 
-    max-width: 550px;
+    gap: 26px; 
+    max-width: 600px; 
   }
 
   .feature-item {
     display: flex;
     align-items: flex-start;
-    gap: 16px; 
+    gap: 18px; 
   }
 
   .feature-icon-check {
     color: #ef4444; 
     flex-shrink: 0;
     margin-top: 4px; 
-    width: 24px; 
-    height: 24px;
+    width: 28px; 
+    height: 28px;
   }
 
   .feature-item p {
     margin: 0;
-    font-size: 1.1rem; 
+    font-size: 1.25rem; 
     line-height: 1.5;
     color: #E2E8F0; 
   }
@@ -139,7 +140,7 @@ export const LoginWrapper = styled.div`
   .feature-item strong {
     color: #FFFFFF; 
     font-weight: 600; 
-    font-size: 1.15rem; 
+    font-size: 1.35rem; 
   }
 
   .form-section {
@@ -158,7 +159,8 @@ export const LoginWrapper = styled.div`
     box-shadow: 0 24px 60px -16px rgba(2, 12, 27, 0.32), 0 8px 18px rgba(2, 12, 27, 0.18); 
     border: 1px solid #f3f4f6;
     width: 100%;
-    margin-top: -70px;
+    /* ---> AQUI ESTÁ A MUDANÇA: Empurrando o card pra baixo <--- */
+    margin-top: 40px; 
   }
   
   .form-header { margin-bottom: 2.5rem; }

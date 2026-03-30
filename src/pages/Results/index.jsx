@@ -31,9 +31,9 @@ export default function ResultadosScreen() {
             <PageTitle>Resultados</PageTitle>
 
             <InfoBar>
-              <span><strong>ID:</strong> HeMoLAB-001</span>
-              <span><strong>Nome:</strong> Simulação Aorta e Cérebro</span>
-              <span><strong>Data:</strong> 29/03/2026</span>
+              <span><strong>ID:</strong> 0000000</span>
+              <span><strong>Nome:</strong> XXXXXXXX XX XXXXXXXX</span>
+              <span><strong>Data:</strong> XX/XX/XXXX</span>
             </InfoBar>
 
             <ButtonGroup>

@@ -24,7 +24,7 @@ export const LogoOverlay = styled.img`
   position: absolute;
   left: 26%; 
   transform: translateX(-50%); 
-  top: 75px; 
+  top: 85px; 
   height: 90px; 
   width: auto;
   object-fit: contain;

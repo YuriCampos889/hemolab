@@ -7,7 +7,6 @@ export const FooterContainer = styled.footer`
   /* background-color: #1A2B4C; */
   
   backdrop-filter: blur(12px); 
-  border-top: 1px solid #E2E8F0;
 
   display: flex;
   align-items: center;
