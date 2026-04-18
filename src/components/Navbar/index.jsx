@@ -25,9 +25,9 @@ export default function Navbar() {
           Resultados
         </NavItem>
         
-        <NavItem>
-          <HelpCircle size={18} /> 
-          Ajuda
+        <NavItem onClick={() => navigate('/about')}>
+          <Activity size={18} /> 
+          About
         </NavItem>
       </NavGroupCenter>
     </NavContainer>

@@ -1,19 +1,29 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-// Ícones removidos (Menu, X, LogOut) pois eram usados apenas no mobile
 import { 
   HeaderContainer, 
   Nav, 
   LogoArea, 
   DesktopMenu, 
   GovLogoWrapper, 
-  LogoCluster 
+  LogoCluster,
+  TrentoLogo,
+  ThemeToggle
 } from './styles';
 
 import LNCClogo from '../../assets/LNCClogo.png';
-import GOVlogo from '../../assets/Gov.br_logo.png';
+import GOVlogo from '../../assets/hemolab_icon_neg.png';
+import Trento from '../../assets/logo.png';
 
 export default function Header() {
   const navigate = useNavigate();
+  
+  // Estado local para o botão saber qual versão do ícone mostrar
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
     <HeaderContainer>
@@ -26,11 +36,18 @@ export default function Header() {
           <GovLogoWrapper>
             <img src={GOVlogo} alt="Logo do Governo" className="logoGov-icon" />
           </GovLogoWrapper>
+
+          <TrentoLogo>
+            <img src={Trento} alt="Logo Trento" className="logoTrento-icon" />
+          </TrentoLogo>
         </LogoCluster>
         
         <DesktopMenu>
-          <Link to="/" className="nav-link">PT-BR</Link>
-          <Link to="/modelos" className="nav-link">Log: USER</Link>
+          <ThemeToggle 
+            isDarkMode={isDarkMode} 
+            onClick={toggleTheme} 
+            aria-label="Alternar tema"
+          />
         </DesktopMenu>
       </Nav>
     </HeaderContainer>

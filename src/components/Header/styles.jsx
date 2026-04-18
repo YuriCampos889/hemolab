@@ -4,8 +4,9 @@ import { Link } from 'react-router';
 export const HeaderContainer = styled.header`
   position: absolute; 
   width: 100%;
-  height: 65px;
-  backdrop-filter: blur(92px);
+  height: 60px;
+
+  backdrop-filter: blur(0px);
   z-index: 100; 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +25,8 @@ export const Nav = styled.nav`
 export const LogoCluster = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.5rem;
+  margin-left: 100px;
   margin-right: auto;
 `;
 
@@ -34,20 +36,29 @@ export const LogoArea = styled(Link)`
   text-decoration: none;
   
   .logo-icon {
-    width: 150px;
+    width: 130px;
     height: auto;
     display: block;
   }
 `;
 
 export const GovLogoWrapper = styled.div`
-  display: flex;
+  display: flex; 
   align-items: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.55);
-  padding-left: 2rem;
 
   .logoGov-icon {
-    width: 82px;
+    width: 150px;
+    height: auto;
+    display: block;
+  }
+`;
+
+export const TrentoLogo = styled.div`
+  display: flex;
+  align-items: center;
+
+  .logoTrento-icon {
+    width: 130px; 
     height: auto;
     display: block;
   }
@@ -57,16 +68,48 @@ export const DesktopMenu = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+`;
 
-  .nav-link {
-    text-decoration: none;
-    color: white; 
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: opacity 0.2s ease;
+// === ÍCONE DARK MODE ===
+export const ThemeToggle = styled.button`
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.2s ease;
+  
+  border: 4px solid #000;
+
+  /* Círculo externo: metade preta na esquerda, metade branca na direita */
+  background: ${props => props.isDarkMode 
+    ? 'linear-gradient(to right, #fff 50%, #000 50%)' 
+    : 'linear-gradient(to right, #000 50%, #fff 50%)'
+  };
+
+  /* Círculo interno usando pseudo-elemento */
+  &::after {
+    content: '';
+    position: absolute;
+    /* Centraliza o círculo interno */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     
-    &:hover {
-      opacity: 0.8; 
-    }
+    width: 45%; 
+    height: 45%;
+    border-radius: 50%;
+    
+    background: ${props => props.isDarkMode 
+      ? 'linear-gradient(to right, #000 50%, #fff 50%)' 
+      : 'linear-gradient(to right, #fff 50%, #000 50%)'
+    };
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 `;

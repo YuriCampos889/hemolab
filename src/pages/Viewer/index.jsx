@@ -20,7 +20,6 @@ import {
   AnalysisTitle,          
   ModelNameLarge,         
   ModelDescriptionText,   
-  AdamImage,
   DropdownContainer,
   NavItem,
   DropdownMenu,
@@ -32,19 +31,52 @@ import Header from '../../components/Header';
 import BackgroundTopbar from '../../components/Backgroundtopbar';
 import Navbar from '../../components/Navbar'; 
 import Footer from '../../components/Footer'; 
-import AdamImg from '../../assets/adan_view.png'; 
 import adan1 from '../../assets/adan1.png';
 import adan2 from '../../assets/adan2.png';
 import adan3 from '../../assets/adan3.png';
+
+// ==========================================
+// IMPORTS DO KIT VTK
+// ==========================================
+import VTKRenderer from '../Viewer/vtk/VTKRenderer'; 
+import { CarregarProcessarModelo } from '../Viewer/vtk/VTKDataParser'; 
 
 export default function LayoutScreen() {
   const navbarRef = useRef(null);
   const [menuAberto, setMenuAberto] = useState(false);
 
+  // ==========================================
+  // ESTADOS DO VISUALIZADOR 3D
+  // ==========================================
+  const [modelData, setModelData] = useState({ source: null });
+  const [vizConfig] = useState({
+    opacity: 100,
+    tubeEnabled: true,
+    flowVisible: false,
+    colorBy: ':', // Força uma cor sólida inicial
+    preset: ''
+  });
+
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
 
+  // ==========================================
+  // BUSCAR O ARQUIVO .VTP NA PASTA PUBLIC/MODELS
+  // ==========================================
+  useEffect(() => {
+    async function fetch3DModel() {
+      try {
+        const data = await CarregarProcessarModelo('/models/adan.vtp');
+        setModelData(data);
+      } catch (error) {
+        console.error("Erro ao carregar o modelo 3D:", error);
+      }
+    }
+    fetch3DModel();
+  }, []);
+
+  // Efeito original de scroll da Navbar
   useEffect(() => {
     if (navbarRef.current) {
       setTimeout(() => {
@@ -71,22 +103,6 @@ export default function LayoutScreen() {
           <CenterColumn> 
             
             <TopActionBar>
-              <DropdownContainer>
-                <NavItem onClick={toggleMenu}>
-                  <Box size={18} /> 
-                  Modelos 
-                  {menuAberto ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                </NavItem>
-                
-                {menuAberto && (
-                  <DropdownMenu>
-                    <DropdownItem>Modelo Adan</DropdownItem>
-                    <DropdownItem>Modelo 2</DropdownItem>
-                    <DropdownItem>Modelo 3</DropdownItem>
-                  </DropdownMenu>
-                )}
-              </DropdownContainer>
-
               <CurrentModelLabel>
                 Modelo: <strong>ADAN</strong>
               </CurrentModelLabel>
@@ -105,8 +121,23 @@ export default function LayoutScreen() {
                 </ThumbnailBox>
               </ThumbnailsSidebar>
 
-              <ImageCanvas>
-                <AdamImage src={AdamImg} alt="Modelo Adam" />
+              {/* ==========================================
+                  CANVAS DO VTK RENDERER
+                  Adicionei um minHeight para garantir que 
+                  o canvas não suma na primeira renderização
+              ========================================== */}
+              <ImageCanvas style={{ position: 'relative', overflow: 'hidden', minHeight: '500px' }}>
+                {modelData.source ? (
+                  <VTKRenderer 
+                    source={modelData.source} 
+                    config={vizConfig} 
+                    highlightedCellId={-1} 
+                  />
+                ) : (
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: '500px', color: '#666' }}>
+                    <p>Carregando modelo 3D ADAN...</p>
+                  </div>
+                )}
               </ImageCanvas>
               
               <DataSection>
