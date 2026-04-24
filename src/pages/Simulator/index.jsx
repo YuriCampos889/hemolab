@@ -1,5 +1,5 @@
-import React from 'react'; 
-// import { Trash2, Eye, X, Download } from 'lucide-react'; 
+import React, { useState, useEffect } from 'react'; // Importação do useState e useEffect adicionada
+// import { Trash2, Eye, X, Download } from 'lucide-react'; // Pode descomentar isso se for usar os ícones no histórico
 
 import useWizard from '../../hooks/Wizard';
 import useSimulatorForm from '../../hooks/SimulationForm';
@@ -25,7 +25,7 @@ export default function ConfigSimulacaoScreen() {
   const scrollRef = useAutoScroll();
   const wizard = useWizard(SIMULATOR_TABS);
   
-  /* === ESTADOS DO HISTÓRICO COMENTADOS ===
+  // === ESTADOS DO HISTÓRICO DESCOMENTADOS ===
   const [historico, setHistorico] = useState(() => {
     const historicoGuardado = localStorage.getItem('@HeMoLAB:historico');
     return historicoGuardado ? JSON.parse(historicoGuardado) : [];
@@ -35,7 +35,6 @@ export default function ConfigSimulacaoScreen() {
   useEffect(() => {
     localStorage.setItem('@HeMoLAB:historico', JSON.stringify(historico));
   }, [historico]);
-  */
 
   const form = useSimulatorForm(() => wizard.resetWizard());
 
@@ -79,7 +78,7 @@ export default function ConfigSimulacaoScreen() {
           </SimulationForm>
         </Card>
 
-        {/* === SEÇÃO DE HISTÓRICO COMENTADA ===
+        {/* === SEÇÃO DE HISTÓRICO DESCOMENTADA E AJUSTADA === */}
         <Card padding="32px" style={{ marginTop: '24px' }}>
           <Title level="h3">Histórico de Simulações</Title>
           <div style={{ marginTop: '20px' }}>
@@ -87,13 +86,13 @@ export default function ConfigSimulacaoScreen() {
                <div style={{ padding: '40px', textAlign: 'center', border: '2px dashed #CBD5E1' }}>Histórico Vazio</div>
             ) : (
                <p>Simulações salvas: {historico.length}</p>
+               /* Aqui você pode adicionar a renderização da tabela do histórico quando quiser exibir os detalhes */
             )}
           </div>
         </Card>
-        */}
       </div>
       
-      {/* === MODAL COMENTADO ===
+      {/* === MODAL MANTIDO COMENTADO (Até você precisar dele) ===
       {selectedSim && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)' }}>
            Modal Detalhes...

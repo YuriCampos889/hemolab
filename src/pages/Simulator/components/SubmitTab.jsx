@@ -18,6 +18,8 @@ export default function SubmitTab({ formData, handleChange, isLoading, erro }) {
         onChange={handleChange}
         error={erro && !formData.userName ? 'Required' : null}
         placeholder="Enter your name"
+        fullWidth={false}
+        style={{ width: '880px', maxWidth: '100%' }}
       />
 
       <Input 
@@ -28,6 +30,8 @@ export default function SubmitTab({ formData, handleChange, isLoading, erro }) {
         onChange={handleChange}
         error={erro && !formData.nome ? erro : null}
         placeholder="e.g. adavn_sim_2026.04.21_14.30.00"
+        fullWidth={false}
+        style={{ width: '880px', maxWidth: '100%' }}
       />
 
       <Button 
@@ -35,7 +39,7 @@ export default function SubmitTab({ formData, handleChange, isLoading, erro }) {
         variant="primary" 
         fullWidth 
         isLoading={isLoading}
-        style={{ marginTop: '20px' }}
+        style={{ width: '880px', marginTop: '100px', minWidth: '220px' }}
       >
         SUBMIT SIMULATION
       </Button>

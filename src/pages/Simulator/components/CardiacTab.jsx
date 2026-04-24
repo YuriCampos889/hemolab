@@ -57,7 +57,9 @@ export default function CardiacTab({ formData, handleChange, isLocked }) {
       <InfoCard>
         <InfoTitle>Cardiac</InfoTitle>
         <InfoText>
-          Text Text Text Text Text Text...
+          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+          Text Text Text Text Text Text Text Text
         </InfoText>
       </InfoCard>
     </TabLayout>

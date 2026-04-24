@@ -46,13 +46,13 @@ export const InfoText = styled.p`
 
 /* ==========================================
    ESTILOS DOS INPUTS E FORMS
-   (Mantidos aqui temporariamente para não quebrar 
-   os componentes internos das suas Abas)
    ========================================== */
 export const SimulationForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* AJUSTE: Altura mínima para garantir que o formulário não encolha */
+  min-height: 450px; 
 `;
 
 export const FormGrid = styled.div`
@@ -133,7 +133,10 @@ export const BottomNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px;
+  
+  /* AJUSTE: margin-top: auto empurra os botões sempre para o final do espaço disponível */
+  margin-top: auto; 
+  
   padding-top: 24px;
   border-top: 2px solid #E2E8F0;
   width: 100%;
@@ -143,7 +146,6 @@ export const NavButtonGroup = styled.div`
   display: flex;
   gap: 16px;
 `;
-
 
 /* ==========================================
    ESTILOS DO HISTÓRICO E MODAL (DESATIVADOS)

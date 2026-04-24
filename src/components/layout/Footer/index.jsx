@@ -6,8 +6,7 @@ export default function Footer() {
   return (
     <FooterContainer role="contentinfo">
       <FooterText>
-        &copy; {currentYear} Hemodynamics Modeling Laboratory (HeMoLAB) - LNCC. Todos os direitos reservados.
-      </FooterText>
+      &copy; {currentYear} Hemodynamics Modeling Laboratory (HeMoLAB) - LNCC. All rights reserved.      </FooterText>
     </FooterContainer>
   );
 }
