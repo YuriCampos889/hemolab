@@ -1,58 +1,40 @@
-import React from 'react'; 
-import {
-  Container,
-  GrayWrapper,
-  MainContent,
-  Card,
-  PageTitle,
-  InfoBar,
-  ButtonGroup,
-  BotaoRegiao,
-  ContainerImagemCompleta,
-  DownloadBtn
-} from './styles';
+import React, { useState } from 'react';
+import PageLayout from '../../components/layout/PageLayout';
+import Card from '../../components/ui/Card';
+import Title from '../../components/ui/Title';
+import Tabs from '../../components/ui/Tabs';
+import Button from '../../components/ui/Button';
 
-import Header from '../../components/Header';
-import BackgroundTopbar from '../../components/Backgroundtopbar';
-import Navbar from '../../components/Navbar'; 
-import Footer from '../../components/Footer'; 
-import adanhead from '../../assets/adan_head 1.png'; 
+import { InfoBar, ContainerImagemCompleta } from './styles';
+import adanhead from '../../assets/adan_head 1.png';
 
 export default function ResultadosScreen() {
+  const [regiao, setRegiao] = useState('Head');
+
   return (
-    <Container>
-      <Header />
-      <BackgroundTopbar />
-      <Navbar />
+    <PageLayout>
+      <Card padding="40px" style={{ alignItems: 'center' }}>
+        <Title underline style={{ alignSelf: 'flex-start' }}>Resultados</Title>
 
-      <GrayWrapper>
-        <MainContent>
-          <Card> 
-            <PageTitle>Resultados</PageTitle>
+        <InfoBar>
+          <span><strong>ID:</strong> 0000000</span>
+          <span><strong>Nome:</strong> Yuri Moreira Campos</span>
+          <span><strong>Data:</strong> 22/04/2026</span>
+        </InfoBar>
 
-            <InfoBar>
-              <span><strong>ID:</strong> 0000000</span>
-              <span><strong>Nome:</strong> XXXXXXXX XX XXXXXXXX</span>
-              <span><strong>Data:</strong> XX/XX/XXXX</span>
-            </InfoBar>
+        <Tabs
+          tabs={['Head', 'Aorta', 'Limbs', 'Torso']}
+          activeTab={regiao}
+          onChange={setRegiao}
+          centered
+        />
 
-            <ButtonGroup>
-              <BotaoRegiao className="ativo">Head</BotaoRegiao>
-              <BotaoRegiao>Aorta</BotaoRegiao>
-              <BotaoRegiao>Limbs</BotaoRegiao>
-              <BotaoRegiao>Torso</BotaoRegiao>
-            </ButtonGroup>
-            
-            <ContainerImagemCompleta>
-              <img src={adanhead} alt="Visualização Principal do HeMoLAB" />
-            </ContainerImagemCompleta>
+        <ContainerImagemCompleta>
+          <img src={adanhead} alt="Visualização Principal do HeMoLAB" />
+        </ContainerImagemCompleta>
 
-            <DownloadBtn>Download .CSV</DownloadBtn>
-          </Card>
-        </MainContent>
-      </GrayWrapper>
-      
-      <Footer />
-    </Container>
+        <Button variant="primary">Download .CSV</Button>
+      </Card>
+    </PageLayout>
   );
 }

@@ -84,13 +84,11 @@ export const ThemeToggle = styled.button`
   
   border: 4px solid #000;
 
-  /* Círculo externo: metade preta na esquerda, metade branca na direita */
   background: ${props => props.isDarkMode 
     ? 'linear-gradient(to right, #fff 50%, #000 50%)' 
     : 'linear-gradient(to right, #000 50%, #fff 50%)'
   };
 
-  /* Círculo interno usando pseudo-elemento */
   &::after {
     content: '';
     position: absolute;

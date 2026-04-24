@@ -1,6 +1,6 @@
-import React from 'react';
-import Background from '../../assets/ADAVN_r_head_03.jpg';
-import Hemolab from '../../assets/AdamLogo.png'; 
+import React from 'react'
+import Background from '../../../assets/ADAVN_r_head_03.jpg';
+import Hemolab from '../../../assets/hemolab_negative 1.png'; 
 import { Container, StyledImage, LogoOverlay } from './styles';
 
 function BackgroundTopbar() {

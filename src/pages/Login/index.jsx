@@ -1,89 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { Mail, Lock, Eye, EyeOff, AlertCircle, User } from 'lucide-react'; 
+import { Mail, Lock, User, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LoginWrapper } from './styles';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer';
 
-import { LoginWrapper } from './styles'; 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-
-import BackgroundVideo from '../../assets/video_entire_ADAN.mp4'; 
+import BackgroundVideo from '../../assets/video_entire_ADAN.mp4';
 import Hemolab from '../../assets/hemolab_negative 1.png';
-import ThemeLogo from '../../assets/adansign.png'; 
+
+import useAuth from '../../hooks/useAuth';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
+import Card from '../../components/ui/Card';
 
 export default function Login() {
-  const navigate = useNavigate();
-  
-  // Estados do Login
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Estados do Cadastro
-  const [registerData, setRegisterData] = useState({ name: '', email: '', password: '' });
-
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  // Submit do Login
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
-    setTimeout(() => {
-      if (formData.email && formData.password) {
-        if (!validateEmail(formData.email)) {
-          setError('Por favor, insira um email válido');
-          setIsLoading(false);
-          return;
-        }
-        if (formData.password.length < 6) {
-          setError('A senha deve ter pelo menos 6 caracteres');
-          setIsLoading(false);
-          return;
-        }
-        
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', formData.email);
-        navigate('/');
-      } else {
-        setError('Por favor, preencha todos os campos');
-        setIsLoading(false);
-      }
-    }, 1500);
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError('');
-  };
-
-  // Funções do Cadastro
-  const handleRegisterChange = (e) => {
-    setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-  };
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    console.log("Dados de cadastro:", registerData);
-    alert("Cadastro realizado com sucesso!");
-  };
+  const { login, register, status } = useAuth();
 
   return (
     <LoginWrapper>
-      <Header/>
+      <Header />
       
       <div className="login-container">
-        
         <div className="background-wrapper" aria-hidden="true">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="bg-video"
-          >
+          <video autoPlay loop muted playsInline className="bg-video">
             <source src={BackgroundVideo} type="video/mp4" />
           </video>
           
@@ -92,7 +30,6 @@ export default function Login() {
         </div>
         
         <div className="login-grid">
-          
           <div className="left-panel">
             <motion.img 
               initial={{ opacity: 0, x: -20 }}
@@ -114,106 +51,119 @@ export default function Login() {
           </div>
 
           <motion.div className="form-section">
-
-            <div className="form-card split-card">
-              
+            <Card 
+              variant="glass" 
+              style={{ flexDirection: 'row', padding: 0, maxWidth: '850px', minHeight: '550px', overflow: 'hidden' }}
+            >
               <div className="login-side">
                 <div className="form-header">
                   <h2>Login</h2>
                 </div>
 
                 <AnimatePresence>
-                  {error && (
+                  {status.error && (
                     <motion.div className="error-message" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                       <AlertCircle size={18} />
-                      <p>{error}</p>
+                      <p>{status.error}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                <form onSubmit={handleSubmit} className="login-form">
+                <form onSubmit={login.handleSubmit} className="login-form">
                   <div className="inputs-container">
-                    <div className="input-group">
-                      <label>EMAIL</label>
-                      <div className="input-wrapper">
-                        <Mail className={`input-icon ${formData.email ? 'active' : ''}`} />
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="seu@email.com" required />
-                      </div>
-                    </div>
-
-                    <div className="input-group" style={{ marginTop: '1.5rem' }}>
-                      <label>SENHA</label>
-                      <div className="input-wrapper">
-                        <Lock className={`input-icon ${formData.password ? 'active' : ''}`} />
-                        <input type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" required />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
-                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="form-footer-options">
-                      <label className="checkbox-label">
-                        <input type="checkbox" />
-                        <span>Lembrar-me</span>
-                      </label>
-                      <a href="#" className="forgot-password">Esqueceu a senha?</a>
-                    </div>
+                    <Input 
+                      label="EMAIL" 
+                      uppercaseLabel 
+                      type="email" 
+                      name="email" 
+                      value={login.data.email} 
+                      onChange={login.handleChange} 
+                      placeholder="Email address" 
+                      leftIcon={<Mail size={18} />} 
+                      required 
+                    />
+                    
+                    <Input 
+                      label="PASSWORD" 
+                      uppercaseLabel 
+                      type="password" 
+                      name="password" 
+                      value={login.data.password} 
+                      onChange={login.handleChange} 
+                      placeholder="••••••••" 
+                      leftIcon={<Lock size={18} />} 
+                      required 
+                    />
                   </div>
 
-                  <button type="submit" disabled={isLoading} className="submit-btn">
-                    {isLoading ? 'Entrando...' : 'Entrar'}
-                  </button>
+                  <div className="form-footer-options">
+                    <label className="checkbox-label">
+                      <input type="checkbox" />
+                      <span>Remember me</span>
+                    </label>
+                    <a href="#" className="forgot-password">Forgot Password?</a>
+                  </div>
+
+                  <Button type="submit" variant="secondary" fullWidth isLoading={status.isLoading} style={{ marginTop: 'auto' }}>
+                    Login
+                  </Button>
                 </form>
               </div>
 
               <div className="register-side">
                 <div className="form-header">
-                  <div className="title-wrapper">
-                    <img src={ThemeLogo} alt="Logo" className="theme-logo-small" />
-                    <h2>Criar Conta</h2>
-                  </div>
+                  <h2>Sign up</h2>
                 </div>
 
-                <form onSubmit={handleRegisterSubmit} className="login-form">
+                <form onSubmit={register.handleSubmit} className="login-form">
                   <div className="inputs-container">
-                    <div className="input-group">
-                      <label>NOME COMPLETO</label>
-                      <div className="input-wrapper">
-                        <User className={`input-icon ${registerData.name ? 'active' : ''}`} />
-                        <input type="text" name="name" value={registerData.name} onChange={handleRegisterChange} placeholder="Seu nome" required />
-                      </div>
-                    </div>
-
-                    <div className="input-group" style={{ marginTop: '1.5rem' }}>
-                      <label>EMAIL</label>
-                      <div className="input-wrapper">
-                        <Mail className={`input-icon ${registerData.email ? 'active' : ''}`} />
-                        <input type="email" name="email" value={registerData.email} onChange={handleRegisterChange} placeholder="seu@email.com" required />
-                      </div>
-                    </div>
-
-                    <div className="input-group" style={{ marginTop: '1.5rem' }}>
-                      <label>SENHA</label>
-                      <div className="input-wrapper">
-                        <Lock className={`input-icon ${registerData.password ? 'active' : ''}`} />
-                        <input type="password" name="password" value={registerData.password} onChange={handleRegisterChange} placeholder="••••••••" required />
-                      </div>
-                    </div>
+                    <Input 
+                      label="YOUR NAME" 
+                      uppercaseLabel 
+                      type="text" 
+                      name="name" 
+                      value={register.data.name} 
+                      onChange={register.handleChange} 
+                      placeholder="Your Name" 
+                      leftIcon={<User size={18} />} 
+                      required 
+                    />
+                    
+                    <Input 
+                      label="EMAIL" 
+                      uppercaseLabel 
+                      type="email" 
+                      name="email" 
+                      value={register.data.email} 
+                      onChange={register.handleChange} 
+                      placeholder="example@email.com" 
+                      leftIcon={<Mail size={18} />} 
+                      required 
+                    />
+                    
+                    <Input 
+                      label="CREATE PASSWORD" 
+                      uppercaseLabel 
+                      type="password" 
+                      name="password" 
+                      value={register.data.password} 
+                      onChange={register.handleChange} 
+                      placeholder="••••••••" 
+                      leftIcon={<Lock size={18} />} 
+                      required 
+                    />
                   </div>
 
-                  <button type="submit" className="submit-btn">
-                    Cadastrar
-                  </button>
+                  <Button type="submit" variant="primary" fullWidth style={{ marginTop: 'auto' }}>
+                    Sign Up
+                  </Button>
                 </form>
               </div>
-
-            </div>
+            </Card>
           </motion.div>
-                
         </div>
       </div>
-
+      
       <Footer />      
     </LoginWrapper>
   );

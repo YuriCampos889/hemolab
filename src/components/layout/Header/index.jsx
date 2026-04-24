@@ -11,9 +11,9 @@ import {
   ThemeToggle
 } from './styles';
 
-import LNCClogo from '../../assets/LNCClogo.png';
-import GOVlogo from '../../assets/hemolab_icon_neg.png';
-import Trento from '../../assets/logo.png';
+import LNCClogo from '../../../assets/LNCClogo.png';
+import GOVlogo from '../../../assets/hemolab_icon_neg.png';
+import Trento from '../../../assets/logo.png';
 
 export default function Header() {
   const navigate = useNavigate();

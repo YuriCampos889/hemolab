@@ -1,41 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-import {
-  Container,
-  GrayWrapper,
-  ContentWrapper,
-  AboutCard,
-  PageTitle,
-  IntroText,
-  FaqContainer,
-  FaqHeader,
-  FaqItem,
-  FaqQuestion,
-  FaqAnswer
+import PageLayout from '../../components/layout/PageLayout';
+import Card from '../../components/ui/Card';
+import Title from '../../components/ui/Title';
+
+import { 
+  IntroText, FaqContainer, FaqHeader, 
+  FaqItem, FaqQuestion, FaqAnswer 
 } from './styles';
 
-import Header from '../../components/Header';
-import BackgroundTopbar from '../../components/Backgroundtopbar';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-
 export default function AboutScreen() {
-  const navbarRef = useRef(null);
   const [openIndex, setOpenIndex] = useState(null);
-
-  useEffect(() => {
-    if (navbarRef.current) {
-      setTimeout(() => {
-        const rect = navbarRef.current.getBoundingClientRect();
-        const elementTop = rect.top + window.scrollY;
-        window.scrollTo({
-          top: elementTop - 120,
-          behavior: 'smooth'
-        });
-      }, 600);
-    }
-  }, []);
 
   const faqs = [
     {
@@ -69,44 +45,33 @@ export default function AboutScreen() {
   };
 
   return (
-    <Container>
-      <Header />
-      <BackgroundTopbar />
-      <div ref={navbarRef}><Navbar /></div>
+    <PageLayout>
+      <Card padding="40px" style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <Title underline>About</Title>
 
-      <GrayWrapper>
-        <ContentWrapper>
-          <AboutCard>
-            <PageTitle>About</PageTitle>
+        <IntroText>
+          Bem-vindo à central de ajuda. Este painel foi desenvolvido para auxiliar na compreensão da nossa plataforma de modelagem e análise vascular. Abaixo, detalhamos o funcionamento do sistema e disponibilizamos as respostas para as dúvidas mais comuns da nossa comunidade de pesquisadores e usuários.
+        </IntroText>
 
-            <IntroText>
-              Bem-vindo à central de ajuda. Este painel foi desenvolvido para auxiliar na compreensão da nossa plataforma de modelagem e análise vascular. Abaixo, detalhamos o funcionamento do sistema e disponibilizamos as respostas para as dúvidas mais comuns da nossa comunidade de pesquisadores e usuários.
-            </IntroText>
-
-            <FaqContainer>
-              <FaqHeader>Perguntas frequentes</FaqHeader>
-              
-              {faqs.map((faq, index) => (
-                <FaqItem key={index}>
-                  <FaqQuestion 
-                    onClick={() => toggleFaq(index)} 
-                    $isOpen={openIndex === index}
-                  >
-                    <span>{faq.question}</span>
-                    {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </FaqQuestion>
-                  <FaqAnswer $isOpen={openIndex === index}>
-                    <p>{faq.answer}</p>
-                  </FaqAnswer>
-                </FaqItem>
-              ))}
-              
-            </FaqContainer>
-          </AboutCard>
-        </ContentWrapper>
-      </GrayWrapper>
-
-      <Footer />
-    </Container>
+        <FaqContainer>
+          <FaqHeader>Perguntas frequentes</FaqHeader>
+          
+          {faqs.map((faq, index) => (
+            <FaqItem key={index}>
+              <FaqQuestion 
+                onClick={() => toggleFaq(index)} 
+                $isOpen={openIndex === index}
+              >
+                <span>{faq.question}</span>
+                {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </FaqQuestion>
+              <FaqAnswer $isOpen={openIndex === index}>
+                <p>{faq.answer}</p>
+              </FaqAnswer>
+            </FaqItem>
+          ))}
+        </FaqContainer>
+      </Card>
+    </PageLayout>
   );
 }

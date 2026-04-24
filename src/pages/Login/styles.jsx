@@ -3,12 +3,8 @@ import styled from 'styled-components';
 export const LoginWrapper = styled.div`
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
-  background: linear-gradient(
-    135deg, 
-    #949497 0%, 
-    #f8f9fa 80%, 
-    #484850 100%
-  );  position: relative;
+  background: linear-gradient(135deg, #949497 0%, #f8f9fa 80%, #484850 100%);
+  position: relative;
   overflow: hidden;
 
   .background-wrapper {
@@ -32,20 +28,9 @@ export const LoginWrapper = styled.div`
     bottom: 0;
     width: 74.5%;
     z-index: 2;
-
     background: 
-      linear-gradient(
-        to top,
-        rgba(120, 0, 20, 0.65) 0%,
-        rgba(120, 0, 20, 0.25) 30%,
-        transparent 60%
-      ),
-      linear-gradient(
-        to right,
-        rgba(5, 15, 45, 0.98) 0%,
-        rgba(10, 30, 80, 0.92) 35%,
-        rgba(0, 0, 0, 0) 70%
-      );
+      linear-gradient(to top, rgba(120, 0, 20, 0.65) 0%, rgba(120, 0, 20, 0.25) 30%, transparent 60%),
+      linear-gradient(to right, rgba(5, 15, 45, 0.98) 0%, rgba(10, 30, 80, 0.92) 35%, rgba(0, 0, 0, 0) 70%);
   }
 
   .login-grid {
@@ -86,23 +71,7 @@ export const LoginWrapper = styled.div`
     justify-content: center;
     padding: 2rem;
     position: relative;
-  }
-
-  .form-card.split-card {
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    max-width: 850px; 
-    min-height: 550px;
-    padding: 0; 
-    z-index: 1;
-    overflow: hidden; 
   }
 
   .login-side {
@@ -118,17 +87,6 @@ export const LoginWrapper = styled.div`
     padding: 3rem;
     display: flex;
     flex-direction: column;
-  }
-
-  .title-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .theme-logo-small {
-    width: 30px;
-    height: 30px;
   }
 
   .form-header h2 {
@@ -156,55 +114,7 @@ export const LoginWrapper = styled.div`
   .inputs-container {
     display: flex;
     flex-direction: column;
-  }
-
-  .input-group label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #e2e8f0;
-    margin-bottom: 0.4rem;
-    display: block;
-    letter-spacing: 0.05em;
-  }
-
-  .input-wrapper {
-    position: relative;
-  }
-
-  .input-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #94a3b8;
-  }
-
-  .input-wrapper input {
-    width: 100%;
-    padding: 1rem 2.8rem;
-    background-color: #f8fafc;
-    border: 2px solid transparent;
-    border-radius: 0.6rem;
-    color: #0f172a;
-    box-sizing: border-box; 
-    transition: all 0.2s;
-  }
-
-  .input-wrapper input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-    outline: none;
-  }
-
-  .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: #94a3b8;
+    gap: 1.5rem;
   }
 
   .form-footer-options {
@@ -212,6 +122,7 @@ export const LoginWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .checkbox-label {
@@ -233,25 +144,5 @@ export const LoginWrapper = styled.div`
   .forgot-password:hover {
     color: #fff;
     text-decoration: underline;
-  }
-
-  .submit-btn {
-    background: #2563eb;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.6rem;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.2s;
-    margin-top: auto;
-    width: 100%;
-  }
-
-  .submit-btn:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   }
 `;

@@ -22,7 +22,7 @@ export const NavContainer = styled.nav`
     left: 0;
     width: 100%; 
     height: 25px; 
-    background-color: rgba(255, 255, 255, 0.4); /* Traduzido o HEX com opacidade para RGBA para melhor legibilidade */
+    background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px); 
     z-index: 1; 
@@ -56,7 +56,7 @@ export const NavItem = styled.div`
   cursor: pointer;
   text-transform: uppercase;
   font-size: 0.8rem; 
-  font-weight: 600; /* Ajustado levemente de 650 para 600, pois fontes costumam pular de 100 em 100 */
+  font-weight: 600;
   letter-spacing: 0.8px; 
   color: #ffffff; 
   transition: all 0.2s ease;

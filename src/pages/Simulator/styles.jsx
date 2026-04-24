@@ -1,73 +1,54 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const rotate = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-weight: 400; 
-  color: #2d3748; 
-  background-color: #ffffff;
-  -webkit-font-smoothing: antialiased; 
-`;
-
-export const GrayWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 40px 40px; 
-  flex: 1; 
-  background-color: #f0f2f5; 
-`;
-
-export const MainContent = styled.main`
-  display: grid; 
-  grid-template-columns: 450px 1fr; 
-  gap: 24px; 
-  width: 100%;
-  max-width: 1400px; 
-  margin: 0 auto;
+/* ==========================================
+   ESTILOS DO LAYOUT DIVIDIDO (FORM / TEXTO)
+   ========================================== */
+export const TabLayout = styled.div`
+  display: grid;
+  grid-template-columns: 1.6fr 1fr; 
+  gap: 48px; 
   align-items: start;
 `;
 
-export const Card = styled.div`
-  background-color: #ffffff; 
-  border-radius: 8px; 
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); 
+export const FormSide = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 32px; 
   width: 100%;
-  border: 1px solid #E2E8F0; 
 `;
 
-export const CenterColumn = styled(Card)``;
-
-/* =========================================================
-   ESTILOS DO FORMULÁRIO
-   ========================================================= */
-
-export const FormTitle = styled.h2`
-  margin: 0 0 24px 0;
-  font-size: 1.8rem; 
-  color: #1A2B4C; 
-  font-weight: 800; 
-  border-bottom: 2px solid #8b2929; 
-  padding-bottom: 12px;
-  width: 100%;
-  display: block;
+export const InfoCard = styled.div`
+  background-color: #F8F9FA;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 32px;
+  position: sticky; 
+  top: 24px; 
 `;
 
+export const InfoTitle = styled.h4`
+  color: #1A2B4C;
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-bottom: 2px solid #CBD5E1;
+  padding-bottom: 8px;
+`;
+
+export const InfoText = styled.p`
+  color: #4A5568;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  
+  &:last-child { margin-bottom: 0; }
+  strong { color: #1A2B4C; }
+`;
+
+/* ==========================================
+   ESTILOS DOS INPUTS E FORMS
+   (Mantidos aqui temporariamente para não quebrar 
+   os componentes internos das suas Abas)
+   ========================================== */
 export const SimulationForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -77,18 +58,18 @@ export const SimulationForm = styled.form`
 export const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr; 
-  gap: 16px; 
+  gap: 20px; 
   margin-top: 16px;
 `;
 
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px; 
+  gap: 8px; 
 `;
 
 export const Label = styled.label`
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #1A2B4C;
   text-transform: capitalize; 
@@ -97,11 +78,11 @@ export const Label = styled.label`
 const InputStyles = `
   width: 100%; 
   box-sizing: border-box; 
-  padding: 12px 16px; 
+  padding: 14px 16px; 
   border: 1px solid #343536eb;
   border-radius: 4px; 
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #2D3748;
   background-color: #F8F9FA; 
   transition: all 0.2s ease;
@@ -113,18 +94,31 @@ const InputStyles = `
     box-shadow: 0 0 0 2px rgba(26, 43, 76, 0.1); 
   }
   
-  &::placeholder {
-    color: #A0AEC0; 
-  }
+  &::placeholder { color: #A0AEC0; }
 
   &.has-error {
     border-color: #8b2929; 
     background-color: #FFF5F5;
   }
+  
+  &:disabled {
+    background-color: #E2E8F0;
+    color: #94A3B8;
+    cursor: not-allowed;
+    border-color: #CBD5E1;
+  }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input`${InputStyles}`;
+
+export const Select = styled.select`
   ${InputStyles}
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
 `;
 
 export const TextArea = styled.textarea`
@@ -132,59 +126,28 @@ export const TextArea = styled.textarea`
   resize: vertical; 
 `;
 
-export const ErrorMessage = styled.span`
-  color: #8b2929;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: 2px;
-  text-transform: uppercase;
-`;
-
-export const SubmitButton = styled.button`
-  margin-top: 32px;
-  padding: 16px;
-  width: 100%; 
-  background-color: #8b2929; 
-  color: #FFFFFF;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover:not(:disabled) {
-    background-color: #6d1f1f; 
-    transform: translateY(-1px); 
-    box-shadow: 0 4px 12px rgba(139, 41, 41, 0.2); 
-  }
-  
-  &:active:not(:disabled) {
-    transform: translateY(0); 
-  }
-
-  &:disabled {
-    background-color: #c97a7a; 
-    cursor: not-allowed;
-  }
-`;
-
-export const LoadingContainer = styled.div`
+/* ==========================================
+   NAVEGAÇÃO INFERIOR DO WIZARD
+   ========================================== */
+export const BottomNav = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  
-  & > svg {
-    animation: ${rotate} 1.2s linear infinite;
-  }
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 2px solid #E2E8F0;
+  width: 100%;
 `;
 
-/* =========================================================
-   ESTILOS DO HISTÓRICO E TABELA
-   ========================================================= */
+export const NavButtonGroup = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+
+/* ==========================================
+   ESTILOS DO HISTÓRICO E MODAL (DESATIVADOS)
+   ==========================================
 
 export const HistorySection = styled(Card)`
   padding: 32px 32px 16px 32px; 
@@ -256,7 +219,6 @@ export const StatusBadge = styled.span`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  /* O pulo do gato aqui: usamos $status */
   background-color: ${(props) => props.$status === 'Concluído' ? '#749d83' : '#EBF8FF'};
   color: ${(props) => props.$status === 'Concluído' ? '#FFFFFF' : '#265179'};
 `;
@@ -291,10 +253,6 @@ export const ActionButton = styled.button`
     border-color: #8b2929;
   }
 `;
-
-/* =========================================================
-   ESTILOS DO MODAL DE DETALHES
-   ========================================================= */
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -396,3 +354,4 @@ export const CloseButton = styled.button`
     color: #8b2929; 
   }
 `;
+*/

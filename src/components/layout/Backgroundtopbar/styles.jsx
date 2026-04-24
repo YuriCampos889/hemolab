@@ -7,15 +7,14 @@ export const Container = styled.div`
   position: relative; 
   background-color: #ffffff;
   margin-bottom: -50px; 
-  z-index: 0;
+  z-index: 4;
 
-  /* Camada de degradê por cima da imagem */
   &::after {
     content: "";
     position: absolute;
-    inset: 0; /* Preenche todo o container */
+    inset: 0;
     background: linear-gradient(to right, rgba(6, 65, 121, 0.9) 0%, rgba(249, 250, 250, 0.3) 50%);
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
   }
 `;
@@ -32,11 +31,11 @@ export const StyledImage = styled.img`
 
 export const LogoOverlay = styled.img`
   position: absolute;
-  left: 16%; 
+  left: 25%; 
   transform: translateX(-50%); 
   top: 85px; 
-  height: 90px; 
+  height: 150px; 
   width: auto;
   object-fit: contain;
-  z-index: 1;
+  z-index: 4;
 `;

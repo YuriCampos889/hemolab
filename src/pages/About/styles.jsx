@@ -1,53 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-weight: 400; 
-  color: #2d3748; 
-  background-color: #ffffff;
-  -webkit-font-smoothing: antialiased; 
-`;
-
-export const GrayWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 40px 40px; 
-  flex: 1; 
-  background-color: #f0f2f5; 
-`;
-
-export const ContentWrapper = styled.main`
-  width: 100%;
-  max-width: 900px; /* Largura máxima para não esticar muito em telas grandes */
-  margin: 0 auto;
-`;
-
-export const AboutCard = styled.div`
-  background-color: #ffffff; 
-  border-radius: 8px; 
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); 
-  display: flex;
-  flex-direction: column;
-  padding: 40px; 
-  width: 100%;
-  border: 1px solid #E2E8F0; 
-`;
-
-export const PageTitle = styled.h2`
-  margin: 0 0 24px 0;
-  font-size: 1.8rem; 
-  color: #1A2B4C; 
-  font-weight: 800; 
-  border-bottom: 2px solid #8b2929; 
-  padding-bottom: 12px;
-  width: 100%;
-  display: block;
-`;
-
 export const IntroText = styled.div`
   background-color: #ffffff;
   border: 1px solid #E2E8F0;
