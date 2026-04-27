@@ -46,7 +46,7 @@ export default function Login() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT.
+              Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text Introductory Text.
             </motion.p>
           </div>
 

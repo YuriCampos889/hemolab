@@ -12,7 +12,7 @@ export const FooterContainer = styled.footer`
   z-index: 1;
 `;
 export const FooterText = styled.p`
-  color: #e2e8f0; 
+  color: #868686; 
   font-size: 0.85rem; 
   font-weight: 500;
   margin: 0;

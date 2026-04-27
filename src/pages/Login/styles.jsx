@@ -9,6 +9,16 @@ export const LoginWrapper = styled.div`
   position: relative;
   overflow: visible;
 
+  .login-form label {
+    color: #F1F5F9;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
   .background-wrapper {
     position: absolute;
     inset: 0;
@@ -81,7 +91,7 @@ export const LoginWrapper = styled.div`
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(255, 255, 255, 0.15); 
+    border: none;
   }
 
   .register-side {
