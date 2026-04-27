@@ -3,9 +3,11 @@ import styled from 'styled-components';
 export const LoginWrapper = styled.div`
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(135deg, #949497 0%, #f8f9fa 80%, #484850 100%);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 
   .background-wrapper {
     position: absolute;
@@ -36,7 +38,7 @@ export const LoginWrapper = styled.div`
   .login-grid {
     display: grid;
     grid-template-columns: 55% 45%; 
-    height: 100vh;
+    min-height: calc(100vh - 120px);
     position: relative;
     z-index: 1;
   }

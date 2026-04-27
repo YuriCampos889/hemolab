@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-/* ==========================================
-   ESTILOS DO LAYOUT DIVIDIDO (FORM / TEXTO)
-   ========================================== */
 export const TabLayout = styled.div`
   display: grid;
   grid-template-columns: 1.6fr 1fr; 
@@ -44,14 +41,10 @@ export const InfoText = styled.p`
   strong { color: #1A2B4C; }
 `;
 
-/* ==========================================
-   ESTILOS DOS INPUTS E FORMS
-   ========================================== */
 export const SimulationForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* AJUSTE: Altura mínima para garantir que o formulário não encolha */
   min-height: 450px; 
 `;
 
@@ -126,17 +119,11 @@ export const TextArea = styled.textarea`
   resize: vertical; 
 `;
 
-/* ==========================================
-   NAVEGAÇÃO INFERIOR DO WIZARD
-   ========================================== */
 export const BottomNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  /* AJUSTE: margin-top: auto empurra os botões sempre para o final do espaço disponível */
   margin-top: auto; 
-  
   padding-top: 24px;
   border-top: 2px solid #E2E8F0;
   width: 100%;
@@ -147,213 +134,126 @@ export const NavButtonGroup = styled.div`
   gap: 16px;
 `;
 
-/* ==========================================
-   ESTILOS DO HISTÓRICO E MODAL (DESATIVADOS)
-   ==========================================
-
-export const HistorySection = styled(Card)`
-  padding: 32px 32px 16px 32px; 
-`;
-
-export const TableScrollContainer = styled.div`
-  max-height: 450px; 
-  overflow-y: auto; 
-  padding-right: 8px; 
-
-  &::-webkit-scrollbar { width: 6px; }
-  &::-webkit-scrollbar-track { background: #F8F9FA; border-radius: 4px; }
-  &::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-  &::-webkit-scrollbar-thumb:hover { background: #A0AEC0; }
-`;
-
-export const EmptyHistoryMessage = styled.div`
-  padding: 60px 40px;
-  text-align: center;
-  color: #1A2B4C;
-  font-size: 1rem;
-  background-color: #FFFFFF;
-  border-radius: 8px;
-  border: 2px dashed #CBD5E1; 
-  font-weight: 600;
-  text-transform: uppercase;
-  line-height: 1.6;
-`;
-
-export const HistoryTable = styled.table`
-  width: 100%;
-  border-collapse: separate; 
-  border-spacing: 0;
-  text-align: left;
-
-  th {
-    padding: 16px;
-    background-color: #1A2B4C; 
-    color: #FFFFFF; 
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    
-    &:first-child { border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
-    &:last-child { border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
-  }
-
-  td {
-    padding: 16px;
-    border-bottom: 1px solid #E2E8F0; 
-    color: #4A5568;
-    font-size: 0.9rem;
-    vertical-align: middle;
-  }
-
-  tbody tr:hover {
-    background-color: #F8F9FA; 
-  }
-`;
-
-export const StatusBadge = styled.span`
-  padding: 6px 16px;
-  border-radius: 20px; 
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background-color: ${(props) => props.$status === 'Concluído' ? '#749d83' : '#EBF8FF'};
-  color: ${(props) => props.$status === 'Concluído' ? '#FFFFFF' : '#265179'};
-`;
-
-export const ActionGroup = styled.div`
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-`;
-
-export const ActionButton = styled.button`
-  background: transparent; 
-  border: 1px solid #CBD5E1; 
-  cursor: pointer;
-  color: #4A5568; 
-  padding: 6px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #F4F6F8; 
-    color: #1A2B4C;
-    border-color: #1A2B4C;
-  }
-
-  &.delete:hover {
-    background-color: #FFF5F5; 
-    color: #8b2929;
-    border-color: #8b2929;
-  }
-`;
-
-export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  backdrop-filter: blur(3px);
-`;
-
-export const ModalContent = styled.div`
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 550px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  position: relative;
-  animation: ${fadeIn} 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-`;
-
-export const ModalHeader = styled.div`
+export const HistoryCard = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  border-bottom: 2px solid #F1F5F9;
-  padding-bottom: 16px;
+  padding: 10px 20px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 
-  h3 { 
-    color: #1A2B4C; 
-    margin: 0; 
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: ${(props) => {
+      if (props.$status === 'Done' || props.$status === 'Completed') return '#22C55E';
+      if (props.$status === 'Running') return '#F59E0B';
+      if (props.$status === 'Submitted') return '#EF4444';
+      return '#22C55E';
+    }};
   }
 `;
 
-export const ModalBody = styled.div`
+export const HistoryInfo = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 2px;
+`;
+
+export const SimTitle = styled.div`
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1A2B4C;
+  margin-bottom: 2px;
+`;
+
+export const MetaRow = styled.div`
+  display: flex;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 32px;
-`;
-
-export const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #F1F5F9;
-  
-  span:first-child { 
-    font-weight: 700; 
-    color: #64748B; 
-    font-size: 0.85rem;
-    text-transform: uppercase;
-  }
-  span:last-child { 
-    color: #1A2B4C; 
-    font-weight: 600;
-    font-size: 1rem;
-  }
-`;
-
-export const DownloadButton = styled(SubmitButton)`
-  margin-top: 0;
-  background-color: #1A2B4C;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  &:hover:not(:disabled) {
-    background-color: #0d1729;
-    box-shadow: 0 10px 15px -3px rgba(26, 43, 76, 0.3);
-  }
-`;
-
-export const CloseButton = styled.button`
-  background: #F1F5F9;
-  border: none;
-  cursor: pointer;
+  font-size: 0.9rem;
   color: #64748B;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  margin-bottom: 2px;
+`;
+
+export const StatusPill = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-
-  &:hover { 
-    background-color: #E2E8F0;
-    color: #8b2929; 
-  }
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  
+  background-color: ${(props) => {
+      if (props.$status === 'Done' || props.$status === 'Completed') return '#DCFCE7';
+      if (props.$status === 'Running') return '#FEF3C7';
+      if (props.$status === 'Submitted') return '#FEE2E2';
+      return '#DCFCE7';
+  }};
+  color: ${(props) => {
+      if (props.$status === 'Done' || props.$status === 'Completed') return '#166534';
+      if (props.$status === 'Running') return '#B45309';
+      if (props.$status === 'Submitted') return '#B91C1C';
+      return '#166534';
+  }};
 `;
-*/
+
+export const IdPill = styled.div`
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #F0F9FF;
+  color: #0369A1;
+`;
+
+export const DateText = styled.div`
+  font-size: 1rem;
+  color: #334155;
+`;
+
+export const TimeText = styled.div`
+  font-size: 0.85rem;
+  color: #94A3B8;
+`;
+
+export const ActionRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const ActionBtn = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ${(props) => props.$variant === 'view' && `
+    background-color: #DBEAFE;
+    color: #1E3A8A;
+    border: none;
+    &:hover { background-color: #BFDBFE; }
+  `}
+
+  ${(props) => props.$variant === 'delete' && `
+    background-color: #FFFFFF;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+    &:hover { background-color: #FEF2F2; }
+  `}
+`;

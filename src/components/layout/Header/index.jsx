@@ -18,7 +18,6 @@ import Trento from '../../../assets/logo.png';
 export default function Header() {
   const navigate = useNavigate();
   
-  // Estado local para o botão saber qual versão do ícone mostrar
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {

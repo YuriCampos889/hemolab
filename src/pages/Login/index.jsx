@@ -5,7 +5,7 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 
 import BackgroundVideo from '../../assets/video_entire_ADAN.mp4';
-import Hemolab from '../../assets/hemolab_negative 1.png';
+import AdavnLogo from '../../assets/Group 10.png';
 
 import useAuth from '../../hooks/useAuth';
 import Input from '../../components/ui/Input';
@@ -35,7 +35,7 @@ export default function Login() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              src={Hemolab} 
+              src={AdavnLogo} 
               alt="HeMoLAB" 
               className="left-hemolab-logo" 
             />

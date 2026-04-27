@@ -71,10 +71,10 @@ export default function VascularTab({ formData, handleChange, isLocked }) {
       <InfoCard>
         <InfoTitle>Vascular</InfoTitle>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+          Vascular Text Description Vascular Text Description Vascular Text Description Vascular Text Description Vascular Text Description Vascular Text Description 
         </InfoText>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+        Vascular Text Description Vascular Text Description Vascular Text Description Vascular Text Description Vascular Text Description 
         </InfoText>
       </InfoCard>
     </TabLayout>

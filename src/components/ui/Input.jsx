@@ -2,10 +2,6 @@ import React, { useState, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { Eye, EyeOff } from 'lucide-react';
 
-/* ==========================================
-   STYLED COMPONENTS
-   ========================================== */
-
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,10 +103,6 @@ const ErrorMessage = styled.span`
   align-items: center;
   gap: 4px;
 `;
-
-/* ==========================================
-   COMPONENTE PRINCIPAL
-   ========================================== */
 
 const Input = forwardRef(({ 
   label, 

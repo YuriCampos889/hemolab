@@ -35,10 +35,30 @@ const INITIAL_STATE = {
   reabsorptionResistance: 1.0
 };
 
-export default function useSimulatorForm(onSuccessCallback) {
+const formatDateForName = (date) => {
+  const pad = (value) => String(value).padStart(2, '0');
+  return `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())} ${pad(date.getHours())}.${pad(date.getMinutes())}.${pad(date.getSeconds())}`;
+};
+
+const createUserId = (userName) => {
+  const sanitized = userName
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
+
+  return sanitized || 'user';
+};
+
+const createShortSimulationId = () => {
+  return `${Date.now().toString(36).slice(-4)}${Math.random().toString(36).slice(2, 4)}`.toUpperCase();
+};
+
+export default function useSimulatorForm(onSuccessCallback, staticUserName = 'Guest User') {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isLoading, setIsLoading] = useState(false);
   const [erro, setErro] = useState('');
+  const [currentSimulationID, setCurrentSimulationID] = useState(() => createShortSimulationId());
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,22 +68,38 @@ export default function useSimulatorForm(onSuccessCallback) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
-    if (!formData.nome.trim() || !formData.userName.trim()) {
-      setErro("NOME DA SIMULAÇÃO E USUÁRIO SÃO OBRIGATÓRIOS.");
+    if (!staticUserName.trim()) {
+      setErro('USER NAME IS REQUIRED.');
       return;
     }
 
     setIsLoading(true);
+    const submitDate = new Date();
+    const userID = createUserId(staticUserName);
+    const simulationID = currentSimulationID;
+    const defaultName = `adavn sim ${formatDateForName(submitDate)}`;
+    const simulationName = formData.nome.trim() || defaultName;
+    const submitPayload = {
+      ...formData,
+      userName: staticUserName,
+      nome: simulationName,
+      userID,
+      simulationID,
+      simID: `${userID}_${simulationID}`,
+      submittedAt: submitDate.toISOString(),
+      status: 'Submitted'
+    };
 
     setTimeout(() => {
       setFormData(INITIAL_STATE);
       setIsLoading(false); 
+      setCurrentSimulationID(createShortSimulationId());
       
       if (onSuccessCallback) {
-        onSuccessCallback();
+        onSuccessCallback(submitPayload);
       }
     }, 2000);
   };
 
-  return { formData, isLoading, erro, handleChange, handleSubmit };
+  return { formData, isLoading, erro, handleChange, handleSubmit, currentSimulationID };
 }

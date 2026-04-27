@@ -1,0 +1,43 @@
+[general]
+model: ADAVN
+user: Logged User
+userID: logged_user
+simID: logged_user_RYQD6D
+date: 2026-04-27T04:20:20.928Z
+name: Test1
+
+[params.cardiac]
+cardiac.waveform: Murgo1980
+cardiac.cycle: 1
+cardiac.output: 5
+systole.duration: 0.37
+retrograde.duration: 0.035
+retrograde.amplitude: 136
+
+[params.respiration]
+respiration.inspiratory_period: 1.875
+respiration.expiratory_period: 3.125
+respiration.inspiratory_pressure: 1
+respiration.expiratory_pressure: 1
+respiration.larynx_volume: 1
+respiration.trachea_volume: 1
+respiration.bronchi_volume: 1
+respiration.alveoli_volume: 1
+
+[params.vascular]
+geometry.rad: 1
+geometry.thickness: 1
+geometry.length: 1
+mechanical.Ee: 1
+mechanical.Ec: 1
+mechanical.Km: 1
+mechanical.e0: 1
+mechanical.er: 1
+
+[params.intracranial]
+vasculature.resistance: 1
+vasculature.compliance: 1
+ventricles.resistance: 1
+ventricles.elastance: 1
+ventricles.volume: 1
+reabsorption.resistance: 1

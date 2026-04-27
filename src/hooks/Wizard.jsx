@@ -7,9 +7,6 @@ export default function useWizard(tabsArray) {
     return tabsArray.reduce((acc, tab) => ({ ...acc, [tab]: false }), {});
   });
 
-  // ==========================================
-  // FUNÇÕES DE AÇÃO
-  // ==========================================
   const handleSave = () => {
     setSavedTabs(prev => ({ ...prev, [activeTab]: true }));
   };
@@ -35,9 +32,6 @@ export default function useWizard(tabsArray) {
     setSavedTabs(tabsArray.reduce((acc, tab) => ({ ...acc, [tab]: false }), {}));
   };
 
-  // ==========================================
-  // VARIÁVEIS AUXILIARES PARA A UI
-  // ==========================================
   const isFirstTab = activeTab === tabsArray[0];
   const isSubmitTab = activeTab === tabsArray[tabsArray.length - 1];
   const isCurrentSaved = savedTabs[activeTab] || false;

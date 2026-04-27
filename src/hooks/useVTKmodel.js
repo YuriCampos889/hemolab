@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react';
 import { CarregarProcessarModelo } from '../pages/Viewer/vtk/VTKDataParser'; 
 
 export default function useVTKModel(modelPath) {
-  const [modelData, setModelData] = useState({ source: null });
+  const [modelData, setModelData] = useState({ source: null, options: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [vizConfig] = useState({
+  const [vizConfig, setVizConfig] = useState({
     opacity: 100,
     tubeEnabled: true,
     flowVisible: false,
-    colorBy: ':', 
-    preset: ''
+    
+    colorBy: 'PointData:Pressure',   
+    preset: 'CustomRedBlue' 
   });
 
   useEffect(() => {
@@ -42,5 +43,5 @@ export default function useVTKModel(modelPath) {
     return () => { isMounted = false; };
   }, [modelPath]);
 
-  return { modelData, vizConfig, isLoading, error };
+  return { modelData, vizConfig, setVizConfig, isLoading, error };
 }

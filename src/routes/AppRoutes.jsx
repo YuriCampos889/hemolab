@@ -4,6 +4,7 @@ import Viewer from '../pages/Viewer';
 import Simulator from '../pages/Simulator'
 import Results from '../pages//Results'
 import About from '../pages/About'
+import Home from '../pages/Home'
 
 export default function AppRoutes() {
     return (
@@ -17,6 +18,8 @@ export default function AppRoutes() {
             <Route path="/Results" element={<Results />} />
 
             <Route path="/About" element={<About />} />
+
+            <Route path="/Home" element={<Home />} />
 
 
         </Routes>

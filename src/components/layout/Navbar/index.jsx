@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Wrench, Activity, HelpCircle } from 'lucide-react';
+import { Home, Box, Wrench, Activity, HelpCircle } from 'lucide-react';
 
 import { NavContainer, NavItem, NavGroupCenter } from './styles';
 
@@ -10,23 +10,28 @@ export default function Navbar() {
   return (
     <NavContainer>
       <NavGroupCenter>
-        <NavItem onClick={() => navigate('/viewer')}>
+        <NavItem onClick={() => navigate('/Home')}>
           <Home size={18} /> 
-          Início
+          Home
+        </NavItem>
+
+        <NavItem onClick={() => navigate('/viewer')}>
+          <Box size={18} /> 
+          3D Viewer
         </NavItem>
         
         <NavItem onClick={() => navigate('/simulator')}>
           <Wrench size={18} /> 
-          Configurar Simulação
+          Configure Simulation
         </NavItem>
         
         <NavItem onClick={() => navigate('/results')}>
           <Activity size={18} /> 
-          Resultados
+          Results
         </NavItem>
         
         <NavItem onClick={() => navigate('/about')}>
-          <Activity size={18} /> 
+          <HelpCircle size={18} /> 
           About
         </NavItem>
       </NavGroupCenter>

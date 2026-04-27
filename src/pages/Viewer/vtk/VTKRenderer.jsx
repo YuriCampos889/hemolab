@@ -22,24 +22,20 @@ import vtkScalarBarActor from '@kitware/vtk.js/Rendering/Core/ScalarBarActor';
 import vtkOrientationMarkerWidget from '@kitware/vtk.js/Interaction/Widgets/OrientationMarkerWidget';
 import vtkAnnotatedCubeActor from '@kitware/vtk.js/Rendering/Core/AnnotatedCubeActor';
 
-// Nossos módulos locais
 import HighlightManager from './HighlightManager';
-import SCALAR_METADATA from './scalarMetadata'; 
+import SCALAR_METADATA from './ScalarMetadata'; 
 
 export default function VTKRenderer({ source, config, highlightedCellId }) {
   const vtkContainerRef = useRef(null);
   const vtkContext = useRef(null);
 
-  // ==========================================
-  // EFEITO 1: INICIALIZAÇÃO
-  // ==========================================
+
   useEffect(() => {
     if (!vtkContext.current && vtkContainerRef.current) {
       const container = vtkContainerRef.current;
       
       const renderWindow = vtkRenderWindow.newInstance();
-      const renderer = vtkRenderer.newInstance({ background: [0.1, 0.12, 0.15] });
-      renderWindow.addRenderer(renderer);
+      const renderer = vtkRenderer.newInstance({ background: [0.9, 0.92, 0.95] });      renderWindow.addRenderer(renderer);
 
       const openGLRenderWindow = vtkOpenGLRenderWindow.newInstance();
       renderWindow.addView(openGLRenderWindow);
@@ -126,83 +122,111 @@ export default function VTKRenderer({ source, config, highlightedCellId }) {
     };
   }, []);
 
-  // ==========================================
-  // EFEITO 2: QUANDO UM NOVO MODELO É CARREGADO
-  // ==========================================
   useEffect(() => {
     if (vtkContext.current && source) {
-      const { tubeFilter, highlightManager, renderWindow, renderer } = vtkContext.current;
+      const { tubeFilter, highlightManager, renderWindow, renderer, mapper } = vtkContext.current;
 
       const pd = source.getPointData();
       const radiusArray = pd.getArrayByName('Radius') || pd.getArrayByName('radius');
+      const lineCells = source.getLines()?.getNumberOfCells?.() || 0;
+      const canUseTube = lineCells > 0;
 
-      if (radiusArray) {
+      if (canUseTube) {
+        if (radiusArray) {
           const name = radiusArray.getName();
           tubeFilter.setInputArrayToProcess(0, name, 'PointData', 'Scalars');
           tubeFilter.setVaryRadius(VaryRadius.VARY_RADIUS_BY_ABSOLUTE_SCALAR);
-      } else {
+          tubeFilter.setRadiusFactor(1.0);
+        } else {
           tubeFilter.setVaryRadius(VaryRadius.VARY_RADIUS_OFF);
-          tubeFilter.setRadius(1.0);
+          tubeFilter.setRadius(0.2);
+        }
+
+        tubeFilter.setInputData(source);
+        mapper.setInputConnection(tubeFilter.getOutputPort());
+      } else {
+        mapper.setInputData(source);
       }
-      
-      tubeFilter.setInputData(source);
+
       highlightManager.setSourceData(source);
 
-      // Centraliza a câmera e força o recálculo do recorte de profundidade
       renderer.resetCamera();
       renderer.resetCameraClippingRange();
       renderWindow.render();
     }
   }, [source]);
 
-  // ==========================================
-  // EFEITO 3: QUANDO O USUÁRIO MUDA CORES/OPACIDADE
-  // ==========================================
   useEffect(() => {
     if (vtkContext.current && config && source) {
-      const { actor, lookupTable, renderWindow, mapper, scalarBar } = vtkContext.current;
+      const { actor, lookupTable, renderWindow, mapper, scalarBar, tubeFilter, renderer } = vtkContext.current;
 
       try {
         actor.getProperty().setOpacity(config.opacity / 100);
-        actor.getProperty().setRepresentation(config.tubeEnabled ? 2 : 1); 
+        actor.getProperty().setRepresentation(2);
+        
+        actor.getProperty().setSpecular(0.15); 
+        actor.getProperty().setSpecularPower(15);
 
-        if (config.preset) {
-          const preset = vtkColorMaps.getPresetByName(config.preset);
-          if (preset) {
-            lookupTable.applyColorMap(preset);
-            lookupTable.updated();
-          }
+        const lineCells = source.getLines()?.getNumberOfCells?.() || 0;
+        const canUseTube = config.tubeEnabled && lineCells > 0;
+        
+        if (canUseTube) {
+          mapper.setInputConnection(tubeFilter.getOutputPort());
+        } else {
+          mapper.setInputData(source);
+        }
+
+        const currentPreset = config.preset || 'Cool to Warm'; 
+        
+        if (currentPreset !== 'CustomRedBlue') {
+          const preset = vtkColorMaps.getPresetByName(currentPreset);
+          if (preset) lookupTable.applyColorMap(preset);
         }
 
         let isColoringByArray = false;
 
         if (config.colorBy && typeof config.colorBy === 'string' && config.colorBy.includes(':')) {
           const [location, arrayName] = config.colorBy.split(':');
-          const usePointData = location === 'PointData';
-          const dataSet = usePointData ? source.getPointData() : source.getCellData();
-          const activeArray = dataSet.getArrayByName(arrayName.trim());
+          const cleanName = arrayName.trim();
+          const dataSet = location === 'PointData' ? source.getPointData() : source.getCellData();
+          
+          if (!dataSet.getArrayByName(cleanName)) {
+            console.warn(`Array "${cleanName}" não encontrado. Arrays disponíveis no modelo:`, 
+              dataSet.getArrays().map(a => a.getName()));
+          }
+
+          const activeArray = dataSet.getArrayByName(cleanName);
 
           if (activeArray) {
             isColoringByArray = true;
-            dataSet.setActiveScalars(arrayName.trim());
+            dataSet.setActiveScalars(cleanName);
             
             const [min, max] = activeArray.getRange();
-            const safeMax = (min === max) ? min + 0.00001 : max;
+            const rangeMin = min;
+            const rangeMax = (min === max) ? min + 1 : max;
 
-            lookupTable.setMappingRange(min, safeMax);
+            lookupTable.setMappingRange(rangeMin, rangeMax);
+
+            if (currentPreset === 'CustomRedBlue') {
+              lookupTable.removeAllPoints();
+              lookupTable.addRGBPoint(rangeMin, 0.0, 0.2, 1.0); 
+              lookupTable.addRGBPoint((rangeMin + rangeMax) / 2, 0.5, 0.0, 0.5); 
+              lookupTable.addRGBPoint(rangeMax, 1.0, 0.0, 0.0); 
+            }
+
             lookupTable.updated();
 
             mapper.set({
-              colorByArrayName: arrayName.trim(),
+              colorByArrayName: cleanName,
               colorMode: ColorMode.MAP_SCALARS,
-              scalarMode: usePointData ? ScalarMode.USE_POINT_FIELD_DATA : ScalarMode.USE_CELL_FIELD_DATA,
+              scalarMode: location === 'PointData' ? ScalarMode.USE_POINT_FIELD_DATA : ScalarMode.USE_CELL_FIELD_DATA,
               scalarVisibility: true,
             });
 
             if (scalarBar) {
               scalarBar.setVisibility(true);
-              const meta = SCALAR_METADATA[arrayName.trim()];
-              scalarBar.setAxisLabel(meta ? meta.label : arrayName.trim());
+              const meta = SCALAR_METADATA[cleanName];
+              scalarBar.setAxisLabel(meta ? meta.label : cleanName);
               scalarBar.modified();
             }
           }
@@ -211,9 +235,10 @@ export default function VTKRenderer({ source, config, highlightedCellId }) {
         if (!isColoringByArray) {
           mapper.setScalarVisibility(false);
           if (scalarBar) scalarBar.setVisibility(false);
-          actor.getProperty().setColor(0.8, 0.1, 0.1); 
+          actor.getProperty().setColor(0.4, 0.5, 0.6);
         }
 
+        renderer.resetCameraClippingRange();
         renderWindow.render();
       } catch (error) {
         console.error("Erro ao aplicar configurações visuais:", error);

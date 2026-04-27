@@ -52,10 +52,11 @@ export default function RespirationTab({ formData, handleChange, isLocked }) {
       <InfoCard>
         <InfoTitle>Respiration</InfoTitle>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+          Respiratory Text Description Respiratory Text Description Respiratory Text Description Respiratory Text Description Respiratory Text Description Respiratory Text Description 
+
         </InfoText>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+        Respiratory Text Description Respiratory Text Description Respiratory Text Description Respiratory Text Description Respiratory Text Description 
         </InfoText>
       </InfoCard>
     </TabLayout>

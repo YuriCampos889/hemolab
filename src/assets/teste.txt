@@ -1,0 +1,30 @@
+[general]
+model: ADAVN
+user: teste
+userID: teste
+simID: teste 1777226583222
+date: 2026-04-26T18:03:03.222Z
+name: teste
+[params.cardiac]
+cardiac.waveform: Murgo1980
+cardiac.cycle: 1
+cardiac.output: 5
+systole.duration: 0.37
+retrograde.duration: 0.035
+retrograde.amplitude: 136
+[params.vascular]
+geometry.rad: 1
+geometry.thickness: 1
+geometry.length: 1
+mechanical.Ee: 1
+mechanical.Ec: 1
+mechanical.Km: 1
+mechanical.e0: 1
+mechanical.er: 1
+[params.intracranial]
+vasculature.resistance: 1
+vasculature.compliance: 1
+ventricles.resistance: 1
+ventricles.elastance: 1
+ventricles.volume: 1
+reabsorption.resistance: 1

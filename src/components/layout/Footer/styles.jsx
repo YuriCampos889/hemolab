@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
-  /* Remova position, bottom e left */
   width: 100%;
   height: 40px;
-  margin-top: auto; /* Ajuda a empurrar pro final se o pai for display: flex */
+  margin-top: auto;
   
   display: flex;
   align-items: center;
@@ -13,7 +12,6 @@ export const FooterContainer = styled.footer`
   z-index: 1;
 `;
 export const FooterText = styled.p`
-  /* Para dar contraste com o vídeo de fundo, talvez seja legal colocar o texto branco ou bem claro */
   color: #e2e8f0; 
   font-size: 0.85rem; 
   font-weight: 500;

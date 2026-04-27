@@ -92,7 +92,6 @@ export const ThemeToggle = styled.button`
   &::after {
     content: '';
     position: absolute;
-    /* Centraliza o círculo interno */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -44,10 +44,12 @@ export default function IntracranialTab({ formData, handleChange, isLocked }) {
       <InfoCard>
         <InfoTitle>Intracranial</InfoTitle>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+          Intracranial Text Description Intracranial Text Description Intracranial Text Description Intracranial Text Description Intracranial Text Description Intracranial Text Description 
+
         </InfoText>
         <InfoText>
-          Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.
+        Intracranial Text Description Intracranial Text Description Intracranial Text Description 
+
         </InfoText>
       </InfoCard>
     </TabLayout>

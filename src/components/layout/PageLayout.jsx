@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// Importe seus componentes globais que você já componentizou
 import Header from '../layout/Header';
 import BackgroundTopbar from '../layout/Backgroundtopbar';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
-// Trazemos os wrappers de estilo para cá para não repetir nas telas
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,13 +35,11 @@ const MainContent = styled.main`
   align-items: start;
 `;
 
-// O componente recebe uma prop chamada "children", que é o miolo da página
 export default function PageLayout({ children, showNavbar = true }) {
   return (
     <Container>
       <Header />
       <BackgroundTopbar />
-      {/* Coloquei uma condicional caso alguma tela (como o Login) não precise da Navbar */}
       {showNavbar && <Navbar />}
 
       <GrayWrapper>
