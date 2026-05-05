@@ -5,22 +5,22 @@ export const ResultsHeader = styled.div`
   justify-content: space-between;
   align-items: flex-end; 
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 2px solid #E2E8F0;
+  gap: 1rem; /* 16px */
+  margin-bottom: 1.5rem; /* 24px */
+  padding-bottom: 1.5rem; /* 24px */
+  border-bottom: 0.125rem solid #E2E8F0; /* 2px */
 `;
 
 export const ControlGroup = styled.div`
   display: flex;
   align-items: flex-end; 
-  gap: 20px;
+  gap: 1.25rem; /* 20px */
 `;
 
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem; /* 6px */
 `;
 
 export const InputLabel = styled.label`
@@ -33,16 +33,16 @@ export const SearchBox = styled.div`
   display: flex;
   align-items: center;
   background: #F8F9FA;
-  border: 1px solid #CBD5E1;
-  border-radius: 8px;
-  padding: 0 12px;
-  width: 250px;
-  height: 40px; 
+  border: 0.0625rem solid #CBD5E1; /* 1px */
+  border-radius: 0.5rem; /* 8px */
+  padding: 0 0.75rem; /* 12px */
+  width: 15.625rem; /* 250px */
+  height: 2.5rem; /* 40px */
 
   input {
     border: none;
     background: transparent;
-    padding: 10px;
+    padding: 0.625rem; /* 10px */
     width: 100%;
     outline: none;
     font-size: 0.95rem;
@@ -56,15 +56,15 @@ export const SearchBox = styled.div`
 
 export const CustomTabsContainer = styled.div`
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 8px;
+  gap: 0.75rem; /* 12px */
+  margin-bottom: 1.5rem; /* 24px */
+  padding-bottom: 0.5rem; /* 8px */
   overflow-x: auto;
 `;
 
 export const TabButton = styled.button`
-  padding: 10px 24px;
-  border-radius: 6px;
+  padding: 0.625rem 1.5rem; /* 10px 24px */
+  border-radius: 0.375rem; /* 6px */
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -74,11 +74,11 @@ export const TabButton = styled.button`
   ${(props) => props.$active ? `
     background-color: #1A2B4C;
     color: #FFFFFF;
-    border: 1px solid #1A2B4C;
+    border: 0.0625rem solid #1A2B4C; /* 1px */
   ` : `
     background-color: #FFFFFF;
     color: #1A2B4C;
-    border: 1px solid #E2E8F0;
+    border: 0.0625rem solid #E2E8F0; /* 1px */
   `}
 
   &:hover {
@@ -89,32 +89,32 @@ export const TabButton = styled.button`
 export const ChartGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  min-height: 400px;
+  gap: 1.25rem; /* 20px */
+  min-height: 25rem; /* 400px */
   
-  @media (max-width: 1024px) {
+  @media (max-width: 64rem) { /* 1024px */
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) { /* 768px */
     grid-template-columns: 1fr;
   }
 `;
 
 export const ChartCard = styled.div`
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  padding: 16px;
+  border: 0.0625rem solid #E2E8F0; /* 1px */
+  border-radius: 0.5rem; /* 8px */
+  padding: 1rem; /* 16px */
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  min-height: 250px; 
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0,0,0,0.05); /* 1px 3px */
+  min-height: 15.625rem; /* 250px */
 
   .chart-header {
     font-size: 0.95rem;
     font-weight: 700;
     color: #1A2B4C;
-    margin-bottom: 16px;
+    margin-bottom: 1rem; /* 16px */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -126,8 +126,8 @@ export const ChartCard = styled.div`
     align-items: center;
     justify-content: center;
     background: #F8F9FA;
-    border: 1px dashed #CBD5E1;
-    border-radius: 6px;
+    border: 0.0625rem dashed #CBD5E1; /* 1px */
+    border-radius: 0.375rem; /* 6px */
     color: #94A3B8;
   }
 `;
@@ -135,12 +135,12 @@ export const ChartCard = styled.div`
 export const FilterBar = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding: 12px 16px;
+  gap: 0.75rem; /* 12px */
+  margin-bottom: 1.25rem; /* 20px */
+  padding: 0.75rem 1rem; /* 12px 16px */
   background-color: #F8F9FA;
-  border-radius: 8px;
-  border: 1px solid #E2E8F0;
+  border-radius: 0.5rem; /* 8px */
+  border: 0.0625rem solid #E2E8F0; /* 1px */
 
   label {
     font-weight: 600;
@@ -149,24 +149,24 @@ export const FilterBar = styled.div`
   }
 
   select {
-    padding: 8px 12px;
-    border: 1px solid #CBD5E1;
-    border-radius: 4px;
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+    border: 0.0625rem solid #CBD5E1; /* 1px */
+    border-radius: 0.25rem; /* 4px */
     outline: none;
     font-size: 0.9rem;
-    min-width: 200px;
+    min-width: 12.5rem; /* 200px */
   }
 `;
 
 export const BiomarkerTable = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 16px;
+  margin-top: 1rem; /* 16px */
 
   th, td {
-    padding: 16px;
+    padding: 1rem; /* 16px */
     text-align: left;
-    border-bottom: 1px solid #E2E8F0;
+    border-bottom: 0.0625rem solid #E2E8F0; /* 1px */
   }
 
   th {
@@ -193,19 +193,19 @@ export const DownloadContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
-  gap: 24px;
+  padding: 5rem 1.25rem; /* 80px 20px */
+  gap: 1.5rem; /* 24px */
 `;
 
 export const DownloadIconWrapper = styled.div`
   background: #F0F9FF;
-  padding: 24px;
+  padding: 1.5rem; /* 24px */
   border-radius: 50%;
   color: #0369A1;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(3, 105, 161, 0.1);
+  box-shadow: 0 0.25rem 0.375rem rgba(3, 105, 161, 0.1); /* 4px 6px */
 `;
 
 export const DownloadContent = styled.div`
@@ -214,12 +214,12 @@ export const DownloadContent = styled.div`
   h3 {
     color: #1A2B4C;
     font-size: 1.5rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem; /* 12px */
   }
 
   p {
     color: #64748B;
-    max-width: 400px;
+    max-width: 25rem; /* 400px */
     line-height: 1.6;
     margin: 0 auto;
   }
@@ -227,6 +227,6 @@ export const DownloadContent = styled.div`
 
 export const ActionGroup = styled.div`
   display: flex;
-  gap: 16px;
-  margin-top: 16px;
+  gap: 1rem; /* 16px */
+  margin-top: 1rem; /* 16px */
 `;

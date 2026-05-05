@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <FooterContainer role="contentinfo">
       <FooterText>
-      &copy; {currentYear} Hemodynamics Modeling Laboratory (HeMoLAB) - LNCC. All rights reserved.      </FooterText>
+      &copy; {currentYear} Hemodynamics Modeling Laboratory (HeMoLab) - LNCC. All rights reserved.      </FooterText>
     </FooterContainer>
   );
 }

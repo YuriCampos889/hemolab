@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(0.625rem); /* 10px */ }
   to { opacity: 1; transform: translateY(0); }
 `;
 
@@ -9,35 +9,32 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 40px; 
+  gap: 2.5rem; /* 40px */
 `;
 
-/* ==========================================
-   HERO SECTION (CAROUSEL)
-   ========================================== */
 export const HeroSection = styled.section`
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
+  gap: 3rem; /* 48px */
   background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); 
-  min-height: 600px;
+  border: 0.0625rem solid #E2E8F0; /* 1px */
+  border-radius: 0.75rem; /* 12px */
+  padding: 2.5rem; /* 40px */
+  box-shadow: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.05), 0 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.03); /* 4px 6px -1px, 2px 4px -1px */
+  min-height: 37.5rem; /* 600px */
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 56.25rem) { /* 900px */
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 24px;
+    padding: 1.5rem; /* 24px */
   }
 `;
 
 export const CarouselWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem; /* 20px */
   width: 100%;
 `;
 
@@ -48,7 +45,7 @@ export const ImageContainer = styled.div`
   overflow: hidden;
   position: relative;
   background-color: #F8F9FA;
-  border: 1px solid #000000;
+  border: 0.0625rem solid #000000; /* 1px */
 `;
 
 export const SlideImage = styled.img`
@@ -62,15 +59,15 @@ export const ControlsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4px;
+  padding: 0 0.25rem; /* 4px */
 `;
 
 export const IconButton = styled.button`
   background-color: #F8F9FA;
-  border: 1px solid #E2E8F0;
+  border: 0.0625rem solid #E2E8F0; /* 1px */
   color: #1A2B4C;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -87,12 +84,12 @@ export const IconButton = styled.button`
 
 export const DotsWrapper = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
 `;
 
 export const Dot = styled.button`
-  width: 10px;
-  height: 10px;
+  width: 0.625rem; /* 10px */
+  height: 0.625rem; /* 10px */
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -110,29 +107,29 @@ export const TextContent = styled.div`
   justify-content: center;
   animation: ${fadeIn} 0.4s ease-out;
 
-  margin-top: -300px; 
+  margin-top: -18.75rem; /* -300px */
 `;
 
 export const ModuleTag = styled.span`
   display: inline-block;
-  padding: 6px 14px;
+  padding: 0.375rem 0.875rem; /* 6px 14px */
   background-color: #F8F9FA;
   color: #0369A1;
-  border: 1px solid #E2E8F0;
+  border: 0.0625rem solid #E2E8F0; /* 1px */
   font-size: 0.85rem;
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 0.375rem; /* 6px */
   width: fit-content;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03125rem; /* 0.5px */
 `;
 
 export const Title = styled.h1`
   color: #1A2B4C;
   font-size: 2.5rem;
   font-weight: 800;
-  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0; /* 16px */
   line-height: 1.2;
 `;
 
@@ -146,15 +143,15 @@ export const Description = styled.p`
 export const RecentActivityContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem; /* 20px */
 `;
 
 export const RecentActivityHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #E2E8F0;
-  padding-bottom: 12px;
+  border-bottom: 0.125rem solid #E2E8F0; /* 2px */
+  padding-bottom: 0.75rem; /* 12px */
 
   h3 {
     margin: 0;
@@ -163,7 +160,7 @@ export const RecentActivityHeader = styled.div`
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem; /* 8px */
   }
 
   svg {
@@ -178,7 +175,7 @@ export const ViewAllButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem; /* 6px */
   font-weight: 600;
   font-size: 0.9rem;
   transition: color 0.2s;
@@ -190,33 +187,33 @@ export const ViewAllButton = styled.button`
 
 export const RecentGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); /* 320px */
+  gap: 1.25rem; /* 20px */
 `;
 
 export const RecentCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 1.25rem; /* 20px */
   background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-left: 4px solid #0369A1; 
-  border-radius: 8px;
+  border: 0.0625rem solid #E2E8F0; /* 1px */
+  border-left: 0.25rem solid #0369A1; /* 4px */
+  border-radius: 0.5rem; /* 8px */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  min-height: 130px;
+  min-height: 8.125rem; /* 130px */
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.125rem); /* -2px */
+    box-shadow: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1); /* 4px 6px -1px */
   }
 `;
 
 export const RecentCardHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.25rem; /* 4px */
 `;
 
 export const RecentCardTitle = styled.strong`
@@ -233,12 +230,12 @@ export const RecentCardStatus = styled.div`
   margin-top: auto;
   font-size: 0.75rem;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 0.25rem 0.625rem; /* 4px 10px */
+  border-radius: 0.375rem; /* 6px */
   width: fit-content;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03125rem; /* 0.5px */
   background-color: ${(props) => (props.$status === 'Done' || props.$status === 'Completed') ? '#DCFCE7' : '#F8F9FA'};
   color: ${(props) => (props.$status === 'Done' || props.$status === 'Completed') ? '#166534' : '#4A5568'};
-  border: 1px solid ${(props) => (props.$status === 'Done' || props.$status === 'Completed') ? '#BBF7D0' : '#E2E8F0'};
+  border: 0.0625rem solid ${(props) => (props.$status === 'Done' || props.$status === 'Completed') ? '#BBF7D0' : '#E2E8F0'}; /* 1px */
 `;

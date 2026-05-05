@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import { Trash2, Eye, X, Download, CheckCircle2, Loader2, CircleDashed } from 'lucide-react'; // Adicionado ícones de status
+import { Trash2, Eye, X, Download, CheckCircle2, Loader2, CircleDashed } from 'lucide-react'; 
 
 import useWizard from '../../hooks/Wizard';
 import useSimulatorForm from '../../hooks/SimulationForm';
@@ -50,6 +50,8 @@ const getLoggedUserName = () => {
   return 'Logged User';
 };
 
+// Funções Auxiliares (criar um Utils)
+// Estas três funções podem ser extraídas para um arquivo separado, 
 const formatDateTimeSplit = (isoDate) => {
   if (!isoDate) return { datePart: '', timePart: '' };
   const d = new Date(isoDate);
@@ -113,6 +115,7 @@ const buildSimulationTxtContent = (simulation) => {
     `reabsorption.resistance: ${simulation.reabsorptionResistance}`
   ].join('\n');
 };
+//Funções Auxiliares (Utils)
 
 export default function ConfigSimulacaoScreen() {
   const scrollRef = useAutoScroll();
@@ -124,6 +127,8 @@ export default function ConfigSimulacaoScreen() {
     const historicoGuardado = localStorage.getItem('@HeMoLAB:historico');
     return historicoGuardado ? JSON.parse(historicoGuardado) : [];
   });
+
+  // isolar toda a lógica de histórico em um hook customizado,
   const [selectedSim, setSelectedSim] = useState(null); 
   const [pendingDeleteSim, setPendingDeleteSim] = useState(null);
 
@@ -193,6 +198,8 @@ export default function ConfigSimulacaoScreen() {
     setPendingDeleteSim(null);
   };
 
+  // Componente (2) Lógica do Download
+  // Se criar o componente `SimulationDetailsModal`, mova essa função para dentro dele
   const handleDownloadSimulation = (simulation) => {
     const content = buildSimulationTxtContent(simulation);
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -207,12 +214,15 @@ export default function ConfigSimulacaoScreen() {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+  // Lógica de Download
 
+  // passar isso pra UI(?)
   const getStatusIcon = (status) => {
     if (status === 'Done' || status === 'Completed') return <CheckCircle2 size={14} />;
     if (status === 'Running') return <Loader2 size={14} className="animate-spin" />;
     return <CircleDashed size={14} />;
   };
+  //Helper de Ícone
 
   return (
     <PageLayout>
@@ -265,6 +275,12 @@ export default function ConfigSimulacaoScreen() {
           </SimulationForm>
         </Card>
 
+        {/* Componente 1: <SimulationHistoryList />
+            Props que ele vai precisar receber:
+            - historico
+            - setSelectedSim
+            - setPendingDeleteSim
+        */}
         <Card padding="32px" style={{ marginTop: '24px' }}>
           <Title level="h3">Simulation History</Title>
           <div style={{ marginTop: '20px' }}>
@@ -309,8 +325,15 @@ export default function ConfigSimulacaoScreen() {
             )}
           </div>
         </Card>
+        {/* Componente 1: <SimulationHistoryList /> */}
       </div>
       
+      {/* Componente 2: <SimulationDetailsModal />
+          Passar as seguintes props:
+          - selectedSim
+          - onClose={() => setSelectedSim(null)}
+          - onDownload={handleDownloadSimulation}
+      */}
       {selectedSim && (
         <div
           style={{
@@ -387,7 +410,14 @@ export default function ConfigSimulacaoScreen() {
           </div>
         </div>
       )}
+      {/* Componente 2: <SimulationDetailsModal /> */}
 
+      {/* Componente 3: <DeleteSimulationModal />
+          Passar as seguintes props:
+          - simulation={pendingDeleteSim}
+          - onClose={() => setPendingDeleteSim(null)}
+          - onConfirm={() => handleDeleteSimulation(pendingDeleteSim)}
+      */}
       {pendingDeleteSim && (
         <div
           style={{
@@ -430,6 +460,7 @@ export default function ConfigSimulacaoScreen() {
           </div>
         </div>
       )}
+      {/* Componente 3: <DeleteSimulationModal /> */}
     </PageLayout>
   );
 }

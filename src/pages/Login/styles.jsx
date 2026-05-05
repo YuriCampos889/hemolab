@@ -5,18 +5,17 @@ export const LoginWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #949497 0%, #f8f9fa 80%, #484850 100%);
+  background-color: #e2e8f0; 
   position: relative;
   overflow: visible;
 
   .login-form label {
-    color: #F1F5F9;
-    font-weight: 600;
-    font-size: 0.8rem;
+    color: #1e293b; 
+    font-weight: 500;
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
     display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
+    text-transform: none; 
   }
 
   .background-wrapper {
@@ -30,7 +29,8 @@ export const LoginWrapper = styled.div`
     width: 65%;
     height: 100%;
     object-fit: cover;
-    transform: translateX(190px);
+    transform: translateX(11.875rem); /* 190px */
+    opacity: 1;
   }
 
   .blur-left {
@@ -40,81 +40,127 @@ export const LoginWrapper = styled.div`
     bottom: 0;
     width: 74.5%;
     z-index: 2;
-    background: 
-      linear-gradient(to top, rgba(120, 0, 20, 0.65) 0%, rgba(120, 0, 20, 0.25) 30%, transparent 60%),
-      linear-gradient(to right, rgba(5, 15, 45, 0.98) 0%, rgba(10, 30, 80, 0.92) 35%, rgba(0, 0, 0, 0) 70%);
+    background: linear-gradient(to right, 
+      #0b3361 15%, 
+      transparent 80%
+    );
   }
 
   .login-grid {
     display: grid;
-    grid-template-columns: 55% 45%; 
-    min-height: calc(100vh - 120px);
+    grid-template-columns: 72% 28%; 
+    min-height: calc(100vh - 7.5rem); /* 120px */
     position: relative;
     z-index: 1;
+    align-items: center;
   }
 
   .left-panel {
     position: relative;
+    padding-left: 6.25rem; /* 100px */
   }
 
   .left-hemolab-logo {
-    position: absolute;
-    top: 140px;
-    left: 100px;
-    width: 520px;
+    width: 32.5rem; /* 520px */
+    margin-bottom: 2rem;
   }
 
   .brand-description-text {
-    position: absolute;
-    top: 440px;
-    left: 100px;
-    max-width: 520px;
-    font-size: 1.2rem;
-    color: white;
+    max-width: 30rem; /* 480px */
+    font-size: 1.1rem;
+    color: #f8fafc;
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.6;
     opacity: 0.9;
-    text-align: justify;
+    text-align: left;
   }
 
   .form-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    justify-content: center; 
+    padding: 2rem; /* 32px */
     position: relative;
     width: 100%;
+    box-sizing: border-box;
   }
 
-  .login-side {
-    flex: 1;
-    padding: 3rem;
+  .auth-card {
+    width: 100%;
+    max-width: 26.25rem; /* 420px */
+    height: 37.5rem; /* 600px */
+    background: rgba(248, 250, 252, 0.75);
+    backdrop-filter: blur(1.5rem); /* 24px */
+    -webkit-backdrop-filter: blur(1.5rem); /* 24px */
+    border: 0.0625rem solid rgba(255, 255, 255, 0.5); /* 1px */
+    border-radius: 1rem; /* 16px */
+    box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.1); /* 10px 40px */
     display: flex;
     flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .tabs-container {
+    display: flex;
+    width: 100%;
+    border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.08); /* 1px */
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-button {
+    flex: 1;
+    background: transparent !important;
+    color: #64748b !important;
     border: none;
+    padding: 1.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    border-radius: 0;
+
+    &:hover {
+      color: #1e293b !important;
+      filter: none;
+    }
+
+    &.active {
+      color: #000000 !important;
+    }
+
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.0625rem; /* -1px */
+      left: 15%;
+      width: 70%;
+      height: 0.1875rem; /* 3px */
+      background-color: #000000;
+      border-radius: 0.1875rem 0.1875rem 0 0; /* 3px 3px 0 0 */
+    }
   }
 
-  .register-side {
-    flex: 1;
-    padding: 3rem;
+  .form-content {
+    padding: 0 2.5rem 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
+    flex: 1;
+  }
+
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .form-header h2 {
-    font-size: 2.2rem;
-    font-weight: 400;
-    margin-bottom: 2rem;
-    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #0f172a;
     margin-top: 0;
-  }
-
-  .error-message {
-    color: #ef4444;
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.85rem;
   }
 
   .login-form {
@@ -126,7 +172,7 @@ export const LoginWrapper = styled.div`
   .inputs-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
   .form-footer-options {
@@ -134,27 +180,47 @@ export const LoginWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .checkbox-label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #cbd5e1;
+    color: #1e293b;
     font-size: 0.85rem;
     cursor: pointer;
   }
 
   .forgot-password {
-    color: #cbd5e1;
+    color: #000000;
     text-decoration: none;
     font-size: 0.85rem;
-    transition: color 0.2s;
+    font-weight: 500;
+    transition: opacity 0.2s;
   }
 
   .forgot-password:hover {
-    color: #fff;
+    opacity: 0.7;
     text-decoration: underline;
+  }
+
+  button.submit-btn {
+    background: #000000 !important;
+    color: white !important;
+    border-radius: 0.5rem;
+    padding: 0.9rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    box-shadow: 0 0.375rem 0.9375rem rgba(0, 0, 0, 0.2); /* 6px 15px */
+    margin-top: auto;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #1a1a1a !important;
+      transform: translateY(-0.125rem); /* -2px */
+      box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3); /* 8px 20px */
+    }
   }
 `;
