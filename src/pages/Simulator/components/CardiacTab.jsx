@@ -1,5 +1,4 @@
 import React from 'react';
-// Importamos o componente global e os estilos de layout da página
 import Input from '../../../components/ui/Input';
 import { TabLayout, FormSide, InfoCard, InfoTitle, InfoText, FormGrid, Select } from '../styles';
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// Guardamos o estado inicial numa constante fora do Hook para facilitar o reset
 const INITIAL_STATE = {
   nome: '', 
   userName: '', 

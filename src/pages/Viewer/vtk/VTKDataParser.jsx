@@ -1,7 +1,7 @@
 // IMPORTANTE: Tem que ser o PolyDataReader da pasta Legacy!
 import vtkPolyDataReader from "@kitware/vtk.js/IO/Legacy/PolyDataReader";
 import vtkXMLPolyDataReader from "@kitware/vtk.js/IO/XML/XMLPolyDataReader";
-import SCALAR_METADATA from "./ScalarMetadata.jsx";
+import SCALAR_METADATA from "./scalarMetadata.jsx";
 
 function getVTPArrays(dataSet, typePrefix) {
     if (!dataSet) return [];

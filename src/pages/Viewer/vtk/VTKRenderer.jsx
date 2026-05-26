@@ -23,7 +23,7 @@ import vtkOrientationMarkerWidget from '@kitware/vtk.js/Interaction/Widgets/Orie
 import vtkAnnotatedCubeActor from '@kitware/vtk.js/Rendering/Core/AnnotatedCubeActor';
 
 import HighlightManager from './HighlightManager';
-import SCALAR_METADATA from './ScalarMetadata'; 
+import SCALAR_METADATA from './scalarMetadata.jsx'; 
 
 export default function VTKRenderer({ source, config, highlightedCellId }) {
   const vtkContainerRef = useRef(null);
