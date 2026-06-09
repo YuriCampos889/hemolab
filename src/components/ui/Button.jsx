@@ -11,16 +11,17 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: ${(props) => props.$size === 'small' ? '8px 16px' : '14px 28px'};
-  border-radius: 6px;
+  gap: 0.625rem;
+  padding: 0 ${(props) => props.$size === 'small' ? '0.8rem' : '1.5rem'};
+  height: ${(props) => props.$size === 'small' ? '2.1rem' : '2.5rem'};
+  border-radius: 0.375rem;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: ${(props) => props.$size === 'small' ? '0.85rem' : '1rem'};
+  font-size: ${(props) => props.$size === 'small' ? '0.85rem' : '0.7rem'};
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625rem;
   width: ${(props) => props.$fullWidth ? '100%' : 'auto'};
   border: none;
 
@@ -29,8 +30,8 @@ const StyledButton = styled.button`
     color: #FFFFFF;
     &:hover:not(:disabled) {
       background-color: #6d1f1f;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(139, 41, 41, 0.25);
+      transform: translateY(-0.125rem);
+      box-shadow: 0 0.25rem 0.75rem rgba(139, 41, 41, 0.25);
     }
   `}
 
@@ -39,15 +40,15 @@ const StyledButton = styled.button`
     color: #FFFFFF;
     &:hover:not(:disabled) {
       background-color: #0d1729;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(26, 43, 76, 0.25);
+      transform: translateY(-0.125rem);
+      box-shadow: 0 0.25rem 0.75rem rgba(26, 43, 76, 0.25);
     }
   `}
 
   ${(props) => props.$variant === 'outline' && css`
     background-color: transparent;
     color: #4A5568;
-    border: 1px solid #CBD5E1;
+    border: 0.0625rem solid #CBD5E1;
     &:hover:not(:disabled) {
       background-color: #F8F9FA;
       color: #1A2B4C;

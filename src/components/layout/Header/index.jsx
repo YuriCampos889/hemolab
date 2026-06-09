@@ -8,7 +8,8 @@ import {
   GovLogoWrapper, 
   LogoCluster,
   TrentoLogo,
-  ThemeToggle
+  ThemeToggle,
+  Divider
 } from './styles';
 
 import LNCClogo from '../../../assets/LNCClogo.png';
@@ -31,23 +32,19 @@ export default function Header() {
           <LogoArea to="/">
             <img src={LNCClogo} alt="LNCC logo" className="logo-icon" />
           </LogoArea>
+          <Divider />
 
           <GovLogoWrapper>
             <img src={GOVlogo} alt="Logo do Governo" className="logoGov-icon" />
           </GovLogoWrapper>
+          <Divider />
 
           <TrentoLogo>
             <img src={Trento} alt="Logo Trento" className="logoTrento-icon" />
           </TrentoLogo>
         </LogoCluster>
         
-        <DesktopMenu>
-          <ThemeToggle 
-            isDarkMode={isDarkMode} 
-            onClick={toggleTheme} 
-            aria-label="Alternar tema"
-          />
-        </DesktopMenu>
+
       </Nav>
     </HeaderContainer>
   );

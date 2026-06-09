@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Clock, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Clock, ArrowRight, BarChart2, Zap, Activity, PlayCircle, User, CheckCircle2, Loader2, FolderOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import PageLayout from '../../components/layout/PageLayout';
+import Button from '../../components/ui/Button';
 import Cardiac from '../../assets/ADAVN_cardiac_.png'
 import Vascular from '../../assets/ADAVN_vascular.png'
 import Resp from '../../assets/ADAVN_resp.png'
 import Intra from '../../assets/ADAVN_intra.png'
+import BackToTop from '../../components/layout/BackToTop';
 
+// NOVO: Importa API e JWT
+import { fetchJobsByUsuario } from '../../services/api';
+import { getUserIdFromToken } from '../../hooks/jwtDecoder';
+import { BASELINE_SIMULATION } from '../../components/layout/History';
 
 import {
   HomeContainer,
@@ -29,7 +36,17 @@ import {
   RecentCard,
   RecentCardTitle,
   RecentCardMeta,
-  RecentCardStatus
+  RecentCardStatus,
+  MiddleGrid,
+  OverviewWrapper,
+  SectionTitle,
+  EmptyStateMessage,
+  StatsRow,
+  StatBox,
+  StatIconBox,
+  StatDetails,
+  QuickActionsWrapper,
+  ActionLink
 } from './styles';
 
 const CAROUSEL_DATA = [
@@ -38,7 +55,6 @@ const CAROUSEL_DATA = [
     tag: 'Cardiac',
     title: 'Cardiac Title',
     description: 'Text Description Text Description Text Description Text Description Text Description Text Description Text Description Text Description Text Description Text Description  ',
-    
     image: Cardiac,
   },
   {
@@ -67,8 +83,63 @@ const CAROUSEL_DATA = [
 export default function HomeScreen() {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [recentSims, setRecentSims] = useState([]);
+  const [stats, setStats] = useState({ total: 0, completed: 0, running: 0 });
+  const userId = getUserIdFromToken();
 
-  const recentSims = JSON.parse(localStorage.getItem('@HeMoLAB:historico') || '[]').slice(0, 3);
+  useEffect(() => {
+    const carregarDados = async () => {
+      let fullHistory = [];
+
+      if (userId) {
+        try {
+          const response = await fetchJobsByUsuario(userId);
+          fullHistory = response?.jobs || [];
+        } catch (err) {
+          fullHistory = JSON.parse(localStorage.getItem('@HeMoLAB:historico') || '[]');
+        }
+      } else {
+        fullHistory = JSON.parse(localStorage.getItem('@HeMoLAB:historico') || '[]');
+      }
+
+      setStats({
+        total: fullHistory.length + 1,
+        completed: fullHistory.filter(s => {
+          const st = (s.status || '').toLowerCase();
+          return st === 'completed' || st === 'done';
+        }).length + 1,
+        running: fullHistory.filter(s => {
+          const st = (s.status || '').toLowerCase();
+          return st === 'processing' || st === 'running';
+        }).length
+      });
+
+      const recentes = [BASELINE_SIMULATION, ...fullHistory]
+        .slice(0, 4) // Pega as 4 últimas simulações
+        .map(job => {
+            let params = {};
+            if (job.parametros) {
+              try {
+                params = typeof job.parametros === 'string' 
+                  ? JSON.parse(job.parametros) 
+                  : job.parametros;
+              } catch(e) {}
+            }
+            
+            return {
+              ...job,
+              historyId: job.id ? `api-${job.id}` : job.historyId,
+              nome: job.nome || 'Simulation',
+              status: job.status || 'processing',
+              simID: params.simID || (job.id ? `#${job.id}` : job.simID)
+            };
+          });
+        
+        setRecentSims(recentes);
+    };
+    
+    carregarDados();
+  }, [userId]);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % CAROUSEL_DATA.length);
@@ -87,10 +158,22 @@ export default function HomeScreen() {
 
   const activeSlide = CAROUSEL_DATA[currentIndex];
 
+  // NOVO: Formata status corretamente
+  const formatStatus = (status) => {
+    if (!status) return 'Unknown';
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  };
+
   return (
     <PageLayout>
       <HomeContainer>
-        <HeroSection>
+
+        <HeroSection
+          as={motion.section}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <CarouselWrapper>
             <ImageContainer>
               <SlideImage key={activeSlide.id} src={activeSlide.image} alt={activeSlide.title} />
@@ -125,33 +208,97 @@ export default function HomeScreen() {
           </TextContent>
         </HeroSection>
 
+        {/* ESTATÍSTICAS & AÇÕES RÁPIDAS */}
+        <MiddleGrid
+          as={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <OverviewWrapper>
+            <SectionTitle>
+              <BarChart2 size={22} /> Overview
+            </SectionTitle>
+            <StatsRow>
+              <StatBox>
+                <StatIconBox $bg="#E0F2FE" $color="#0369A1"><Activity size={20} /></StatIconBox>
+                <StatDetails><h4>{stats.total}</h4><span>Total Simulations</span></StatDetails>
+              </StatBox>
+              <StatBox>
+                <StatIconBox $bg="#DCFCE7" $color="#166534"><CheckCircle2 size={20} /></StatIconBox>
+                <StatDetails><h4>{stats.completed}</h4><span>Completed</span></StatDetails>
+              </StatBox>
+              <StatBox>
+                <StatIconBox $bg="#FEF9C3" $color="#A16207"><Loader2 size={20} /></StatIconBox>
+                <StatDetails><h4>{stats.running}</h4><span>In Progress</span></StatDetails>
+              </StatBox>
+            </StatsRow>
+
+          </OverviewWrapper>
+
+          <QuickActionsWrapper>
+            <SectionTitle><Zap size={22} /> Quick Actions</SectionTitle>
+            <ActionLink onClick={() => {
+              window.scrollTo(0, 0);
+              navigate('/simulator', { state: { reset: true } });
+            }}>
+              <PlayCircle size={22} color="#0369A1" /> <span>Start New Simulation</span>
+              <ArrowRight size={18} className="arrow-icon" />
+            </ActionLink>
+            <ActionLink onClick={() => navigate('/profile')}>
+              <User size={22} color="#0369A1" /> <span>Update Profile</span>
+              <ArrowRight size={18} className="arrow-icon" />
+            </ActionLink>
+          <ActionLink onClick={() => navigate('/documentation')}>
+            <FolderOpen size={22} color="#0369A1" /> <span>Documentation</span>
+            <ArrowRight size={18} className="arrow-icon" />
+          </ActionLink>
+          </QuickActionsWrapper>
+        </MiddleGrid>
+
         {/* ATIVIDADE RECENTE */}
-        {recentSims.length > 0 && (
-          <RecentActivityContainer>
+          <RecentActivityContainer
+            as={motion.section}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <RecentActivityHeader>
               <h3><Clock size={22} /> Recent Activity</h3>
-              <ViewAllButton onClick={() => navigate('/results')}>
-                View History <ArrowRight size={18} />
+              <ViewAllButton onClick={() => {
+                window.scrollTo(0, 0);
+                navigate('/simulator', { state: { reset: true } });
+              }}>
+                <span>View History</span> <ArrowRight size={18} className="arrow-icon" />
               </ViewAllButton>
             </RecentActivityHeader>
             
-            <RecentGrid>
-              {recentSims.map(sim => {
-                const displayStatus = sim.status === 'Done' ? 'Completed' : (sim.status || 'Completed');
-                
-                return (
-                  <RecentCard key={sim.historyId} onClick={() => navigate('/results')}>
-                    <RecentCardTitle>{sim.nome}</RecentCardTitle>
-                    <RecentCardMeta>SimID: {sim.simID}</RecentCardMeta>
-                    <RecentCardStatus $status={displayStatus}>
-                      {displayStatus}
-                    </RecentCardStatus>
-                  </RecentCard>
-                );
-              })}
-            </RecentGrid>
+            {recentSims.length > 0 ? (
+              <RecentGrid>
+                {recentSims.map(sim => {
+                  const displayStatus = formatStatus(sim.status);
+                  
+                  return (
+                    <RecentCard key={sim.historyId || Math.random()} onClick={() => navigate('/results')}>
+                      <RecentCardTitle>{sim.nome}</RecentCardTitle>
+                      <RecentCardMeta>SimID: {sim.simID}</RecentCardMeta>
+                      <RecentCardStatus $status={displayStatus}>
+                        {displayStatus}
+                      </RecentCardStatus>
+                    </RecentCard>
+                  );
+                })}
+              </RecentGrid>
+            ) : (
+              <EmptyStateMessage>
+                <Activity size={40} color="#CBD5E1" style={{ marginBottom: '1rem' }} />
+                <h4 style={{ margin: '0 0 0.5rem 0', color: '#1A2B4C' }}>No recent simulations</h4>
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>You haven't run any simulations yet. Start your first analysis from the Quick Actions menu</p>
+              </EmptyStateMessage>
+            )}
           </RecentActivityContainer>
-        )}
+          
+        <BackToTop />
       </HomeContainer>
     </PageLayout>
   );

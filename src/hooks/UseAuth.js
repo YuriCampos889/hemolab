@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+
+import { login, cadastroUsuario } from '../services/api';
 
 export default function useAuth() {
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [registerData, setRegisterData] = useState({ name: '', email: '', password: '' });
+  const [registerData, setRegisterData] = useState({ nome: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,6 +20,7 @@ export default function useAuth() {
 
   const handleRegisterChange = (e) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+    if (error) setError(''); 
   };
 
   const handleLoginSubmit = async (e) => {
@@ -25,34 +28,65 @@ export default function useAuth() {
     setError('');
     setIsLoading(true);
 
-    setTimeout(() => {
-      if (!formData.email || !formData.password) {
-        setError('Please fill in all fields');
-        setIsLoading(false);
-        return;
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      setIsLoading(false);
+      return;
+    }
+    if (!validateEmail(formData.email)) {
+      setError('Please enter a valid email');
+      setIsLoading(false);
+      return;
+    }
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      setIsLoading(false);
+      return;
+    }
+    
+    try {
+      // CORREÇÃO: Chamando a função login do seu api.js
+      const data = await login(formData.email, formData.password);
+
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('@HeMoLAB:userEmail', formData.email);
+        navigate('/Home'); 
+      } else {
+        setError('Token not received from server.');
       }
-      if (!validateEmail(formData.email)) {
-        setError('Please enter a valid email');
-        setIsLoading(false);
-        return;
-      }
-      if (formData.password.length < 6) {
-        setError('Password must be at least 6 characters long');
-        setIsLoading(false);
-        return;
-      }
-      
-      // Sucesso
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userEmail', formData.email);
-      navigate('/');
-    }, 1500);
+    } catch (err) {
+      console.error("Login Error:", err);
+      setError(err.message || 'Connection error with the server.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registration data:", registerData);
-    alert("Registration successful!");
+    setError('');
+    setIsLoading(true);
+
+    if (!registerData.nome || !registerData.email || !registerData.password) {
+      setError('Please fill in all fields');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // CORREÇÃO: Chamando a função cadastroUsuario do seu api.js
+      await cadastroUsuario(registerData);
+
+      alert("Registration successful! You can now log in.");
+      setRegisterData({ nome: '', email: '', password: '' });
+
+    } catch (err) {
+      console.error("Registration Error:", err);
+      setError(err.message || 'Error creating account.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {

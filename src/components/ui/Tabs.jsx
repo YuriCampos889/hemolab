@@ -3,30 +3,33 @@ import styled, { css } from 'styled-components';
 
 const TabContainer = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 0.6rem;
   flex-wrap: wrap;
   width: 100%;
   
   ${(props) => props.$centered ? 'justify-content: center;' : 'justify-content: flex-start;'}
   
   ${(props) => props.$withBorder ? css`
-    margin-bottom: 32px;
-    border-bottom: 2px solid #E2E8F0;
-    padding-bottom: 16px;
+    margin-bottom: 1.6rem;
+    border-bottom: 0.1rem solid #E2E8F0;
+    padding-bottom: 0.8rem;
   ` : css`
-    margin-bottom: 24px;
+    margin-bottom: 1.2rem;
   `}
 `;
 
 const TabButton = styled.button`
   background-color: ${(props) => props.$active ? '#1A2B4C' : 'transparent'};
   color: ${(props) => props.$active ? '#FFFFFF' : '#4A5568'};
-  border: 1px solid ${(props) => props.$active ? '#1A2B4C' : '#CBD5E1'};
-  padding: 10px 20px;
-  border-radius: 6px;
+  border: 0.05rem solid ${(props) => props.$active ? '#1A2B4C' : '#CBD5E1'};
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
   font-family: inherit;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -52,6 +55,7 @@ export default function Tabs({
       {tabs.map((tab) => {
         const value = typeof tab === 'string' ? tab : tab.value;
         const label = typeof tab === 'string' ? tab : tab.label;
+        const Icon = typeof tab === 'string' ? null : tab.icon;
 
         return (
           <TabButton
@@ -61,6 +65,7 @@ export default function Tabs({
             $readOnly={readOnly}
             onClick={() => onChange && onChange(value)}
           >
+            {Icon && <Icon size={14} />}
             {label}
           </TabButton>
         );

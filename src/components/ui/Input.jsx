@@ -5,12 +5,12 @@ import { Eye, EyeOff } from 'lucide-react';
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.3rem;
   width: ${(props) => (props.$fullWidth ? '100%' : 'auto')};
 `;
 
 const Label = styled.label`
-  font-size: 0.85rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #1A2B4C;
   text-transform: ${(props) => props.$uppercase ? 'uppercase' : 'capitalize'};
@@ -26,7 +26,7 @@ const InputWrapper = styled.div`
 
 const IconLeft = styled.div`
   position: absolute;
-  left: 14px;
+  left: 0.7rem;
   color: ${(props) => (props.$hasValue ? '#1A2B4C' : '#94a3b8')};
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@ const IconLeft = styled.div`
 
 const IconRight = styled.div`
   position: absolute;
-  right: 14px;
+  right: 0.7rem;
   color: #94a3b8;
   display: flex;
   align-items: center;
@@ -56,22 +56,22 @@ const StyledInput = styled.input`
   width: 100%;
   box-sizing: border-box;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.76rem;
   color: #2D3748;
   background-color: #F8F9FA;
-  border: 1px solid #CBD5E1;
-  border-radius: 6px;
+  border: 0.05rem solid #CBD5E1;
+  border-radius: 0.3rem;
   transition: all 0.2s ease;
   
-  padding: 14px 16px;
-  ${(props) => props.$hasLeftIcon && 'padding-left: 42px;'}
-  ${(props) => props.$hasRightIcon && 'padding-right: 42px;'}
+  padding: 0.7rem 0.8rem;
+  ${(props) => props.$hasLeftIcon && 'padding-left: 2.1rem;'}
+  ${(props) => props.$hasRightIcon && 'padding-right: 2.1rem;'}
 
   &:focus {
     outline: none;
     border-color: #1A2B4C;
     background-color: #FFFFFF;
-    box-shadow: 0 0 0 3px rgba(26, 43, 76, 0.1);
+    box-shadow: 0 0 0 0.15rem rgba(26, 43, 76, 0.1);
   }
 
   &::placeholder {
@@ -89,19 +89,19 @@ const StyledInput = styled.input`
     border-color: #8b2929;
     background-color: #FFF5F5;
     &:focus {
-      box-shadow: 0 0 0 3px rgba(139, 41, 41, 0.1);
+      box-shadow: 0 0 0 0.15rem rgba(139, 41, 41, 0.1);
     }
   `}
 `;
 
 const ErrorMessage = styled.span`
   color: #8b2929;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  margin-top: 2px;
+  margin-top: 0.1rem;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.2rem;
 `;
 
 const Input = forwardRef(({ 

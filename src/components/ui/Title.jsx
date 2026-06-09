@@ -10,9 +10,12 @@ const baseStyles = css`
 `;
 
 const underlineStyles = css`
-  border-bottom: 2px solid #8b2929;
-  padding-bottom: 12px;
-  margin-bottom: 24px;
+  /* 2px / 16 = 0.125rem */
+  border-bottom: 0.125rem solid #8b2929;
+  /* 12px / 16 = 0.75rem */
+  padding-bottom: 0.75rem;
+  /* 24px / 16 = 1.5rem */
+  margin-bottom: 1.5rem;
 `;
 
 const StyledH2 = styled.h2`
